@@ -1,4 +1,6 @@
-
+188.93.59.0
+lalallaland.ru
+dmarc.list.ru
 mdsngpush.westeurope.cloudapp.azure.com
 billing-cbr.ru
 updatetechnews.com
@@ -483,3 +485,5 @@ himaughsofres.online
 54.236.38.98
 195.123.233.240
 195.123.233.241
+hmrc-invoice.co.uk
+91.218.125.15

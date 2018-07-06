@@ -40,6 +40,7 @@ func main() {
 		usage("no command specified")
 	}
 
+
 	cmd := strings.ToLower(os.Args[1])
 	switch cmd {
 	case "debug":
