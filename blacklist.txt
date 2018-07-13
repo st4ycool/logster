@@ -1,6 +1,4 @@
-188.93.59.0
 lalallaland.ru
-dmarc.list.ru
 mdsngpush.westeurope.cloudapp.azure.com
 billing-cbr.ru
 updatetechnews.com

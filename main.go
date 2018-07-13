@@ -25,7 +25,7 @@ func usage(errmsg string) {
 }
 
 func main() {
-	const svcName = "MDaemonLogAnalyze"
+	const svcName = "blacklog"
 
 	isIntSess, err := svc.IsAnInteractiveSession()
 	if err != nil {
@@ -47,7 +47,7 @@ func main() {
 		runService(svcName, true)
 		return
 	case "install":
-		err = installService(svcName, "MDaemon Log Analyzer")
+		err = installService(svcName, "blacklog")
 	case "remove":
 		err = removeService(svcName)
 	case "start":
