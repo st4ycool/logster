@@ -25,7 +25,6 @@ func scan_logs()  {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(dir)
 	elog.Info(1, "working in directory: "+dir)
 
 	//scan blacklist hash
@@ -75,7 +74,6 @@ func scan_logs()  {
 		}															//collect all info into logs_info string slice
 	}
 
-	var files []string
 	file_names := make([]string, 0)
 	root, e := os.Getwd()
 	if e != nil {
@@ -88,11 +86,7 @@ func scan_logs()  {
 		}
 
 		if filepath.Ext(path) == ".log" {
-			log_file, _ := os.Open(path)
-			defer log_file.Close()
-			files = append(files, path)
-			a, _ := filepath.Abs(path)
-			file_names = append(file_names, a) //collect all .txt file names from current directory
+			file_names = append(file_names, filepath.Base(path)) //collect all .txt file names from current directory
 		}
 		return nil
 	})
@@ -136,39 +130,50 @@ func scan_logs()  {
 			new_log_file_size, _ := getFileSize(log_name)
 
 			switch {
-			case old_log_file_size == 0 && offset == 0: if blacklist_changed!=true {println("\n" + log_name + " file record not found. Scan from the bottom! ")}
-			case old_log_file_size == new_log_file_size: dat +="\r\n" +  logs_info[z]
-														 if blacklist_changed!=true {println(info[0] + " file size hasn't been changed! Scan skipped. ")}
-														 continue
-			case old_log_file_size != new_log_file_size: if blacklist_changed!=true {println(info[0] + " file record found. Starting scan where it's been ended.")}
 
-			}
+				case 	old_log_file_size == 0 && offset == 0:
+							if blacklist_changed!=true {println("\n" + log_name + " file record not found. Scan from the bottom! ")}
+
+				case 	old_log_file_size == new_log_file_size:
+							dat +="\r\n" +  logs_info[z]
+							if blacklist_changed!=true {println(info[0] + " file size hasn't been changed! Scan skipped. ")}
+							continue
+
+				case  	old_log_file_size != new_log_file_size:
+							if blacklist_changed!=true {println(info[0] + " file record found. Starting scan where it's been ended.")}
+				}
+
 			elog.Info(6, "decided what to do with file")
 
 
-			dat += "\r\n" + log_name + " " + strconv.FormatInt(new_log_file_size, 10) + " " + strconv.FormatInt(new_log_file_size, 10)
-			elog.Info(7, "updated dat string")
+			sheet, found, err := analyze(log_name, offset, banned_urls) //analyze current log file
 
-			sheet, found := analyze(log_name, offset, banned_urls) //analyze current log file
+			if os.IsNotExist(err) {
+				elog.Info(6, ".. buuut file not found")
+			} else if err == nil {
+				dat += "\r\n" + log_name + " " + strconv.FormatInt(new_log_file_size, 10) + " " + strconv.FormatInt(new_log_file_size, 10)
+				elog.Info(7, "updated dat string")
 
-			report := fmt.Sprintf("\n               _                                  _                               _                         ")
-			report += fmt.Sprintf("\n              | |                                | |                             | |                        ")
-			report += fmt.Sprintf("\n _ __ ___   __| | __ _  ___ _ __ ___   ___  _ __ | | ___   __ _  __ _ _ __   __ _| |_   _ _______           ")
-			report += fmt.Sprintf("\n| '_ ` _ \\ / _` |/ _` |/ _ \\ '_ ` _ \\ / _ \\| '_ \\| |/ _ \\ / _` |/ _` | '_ \\ / _` | | | | |_  / _ \\  ")
-			report += fmt.Sprintf("\n| | | | | | (_| | (_| |  __/ | | | | | (_) | | | | | (_) | (_| | (_| | | | | (_| | | |_| |/ /  __/          ")
-			report += fmt.Sprintf("\n|_| |_| |_|\\__,_|\\__,_|\\___|_| |_| |_|\\___/|_| |_|_|\\___/ \\__, |\\__,_|_| |_|\\__,_|_|\\__, /___\\___|")
-			report += fmt.Sprintf("\n                                                           __/ |                     __/ |                  ")
-			report += fmt.Sprintf("\n                                                          |___/                     |___/         		    ")
-			report += fmt.Sprintf("\n				______ ___________ ___________ _____")
-			report += fmt.Sprintf("\n				| ___ \\  ___| ___ \\  _  | ___ \\_   _|")
-			report += fmt.Sprintf("\n				| |_/ / |__ | |_/ / | | | |_/ / | |")
-			report += fmt.Sprintf("\n				|    /|  __||  __/| | | |    /  | |")
-			report += fmt.Sprintf("\n				| |\\ \\| |___| |   \\ \\_/ / |\\ \\  | |")
-			report += fmt.Sprintf("\n				\\_| \\_\\____/\\_|    \\___/\\_| \\_| \\_/")
-			report += fmt.Sprintf("\n\n\nMdaemon Log analyzer REPORT for file: %s \r\nFound %d e-mails from blacklist!", log_name, found)
-			report += sheet
-			if found > 0 {
-				alertMail("u.anikin@morskoybank.com", "u.anikin@morskoybank.com", fmt.Sprintf("Alert-report for file %s! %d blacklist e-mails reveived!", log_name, found), report)
+				report := fmt.Sprintf("\n               _                                  _                               _                         ")
+				report += fmt.Sprintf("\n              | |                                | |                             | |                        ")
+				report += fmt.Sprintf("\n _ __ ___   __| | __ _  ___ _ __ ___   ___  _ __ | | ___   __ _  __ _ _ __   __ _| |_   _ _______           ")
+				report += fmt.Sprintf("\n| '_ ` _ \\ / _` |/ _` |/ _ \\ '_ ` _ \\ / _ \\| '_ \\| |/ _ \\ / _` |/ _` | '_ \\ / _` | | | | |_  / _ \\  ")
+				report += fmt.Sprintf("\n| | | | | | (_| | (_| |  __/ | | | | | (_) | | | | | (_) | (_| | (_| | | | | (_| | | |_| |/ /  __/          ")
+				report += fmt.Sprintf("\n|_| |_| |_|\\__,_|\\__,_|\\___|_| |_| |_|\\___/|_| |_|_|\\___/ \\__, |\\__,_|_| |_|\\__,_|_|\\__, /___\\___|")
+				report += fmt.Sprintf("\n                                                           __/ |                     __/ |                  ")
+				report += fmt.Sprintf("\n                                                          |___/                     |___/         		    ")
+				report += fmt.Sprintf("\n				______ ___________ ___________ _____")
+				report += fmt.Sprintf("\n				| ___ \\  ___| ___ \\  _  | ___ \\_   _|")
+				report += fmt.Sprintf("\n				| |_/ / |__ | |_/ / | | | |_/ / | |")
+				report += fmt.Sprintf("\n				|    /|  __||  __/| | | |    /  | |")
+				report += fmt.Sprintf("\n				| |\\ \\| |___| |   \\ \\_/ / |\\ \\  | |")
+				report += fmt.Sprintf("\n				\\_| \\_\\____/\\_|    \\___/\\_| \\_| \\_/")
+				report += fmt.Sprintf("\n\n\nMdaemon Log analyzer REPORT for file: %s \r\nFound %d e-mails from blacklist!", log_name, found)
+				report += sheet
+
+				if found > 0 {
+					alertMail("u.anikin@morskoybank.com", "u.anikin@morskoybank.com", fmt.Sprintf("Alert-report for file %s! %d blacklist e-mails reveived!", log_name, found), report)
+				}
 			}
 	}
 
@@ -180,7 +185,7 @@ func scan_logs()  {
 }
 
 func getFileSize (filePath string) (int64, error) {
-	fi, e := os.Stat(filePath);
+	fi, e := os.Stat(filePath)
 	if e != nil {
 		return 0, e
 	}
@@ -188,12 +193,12 @@ func getFileSize (filePath string) (int64, error) {
 	return fi.Size(), nil
 }
 
-func analyze(log_name string, offset int64, banned_urls []string) (string, int) {
-
-	elog.Info(50, "analyze: log:" + string(log_name) + "; offset: " + string(offset))
+func analyze(log_name string, offset int64, banned_urls []string) (string, int, error) {
 
 	log_file, err := os.Open(log_name)
-	chech_err(err)
+	if err != nil {
+		return "", 0, err //means that entry from logs_info will be removed if that file doesn't exist
+	}
 	defer log_file.Close()
 
 
@@ -251,7 +256,7 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int) 
 				if banned != "" {
 					if strings.Contains(found_match, banned) {
 						found++ //counter for found intersection
-						report += "\n\n\n##############\n" + "Found banned: \""+ banned + "\" in section: \n" + log_entry
+						report += "\n\n\n##############\n" + "Found banned \""+ banned + "\" in section: \n" + log_entry
 					}
 				}
 			}
@@ -260,7 +265,7 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int) 
 	}
 	fmt.Printf(report)
 
-	return report, found
+	return report, found, err
 }
 
 func chech_err (err error) {
