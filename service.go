@@ -22,6 +22,8 @@ import (
 	"strconv"
 )
 
+const PATH_SEPARATOR = "\\"
+
 var elog debug.Log
 
 type myservice struct{}
@@ -34,7 +36,7 @@ func (m *myservice) Execute(args []string, r <-chan svc.ChangeRequest, changes c
 		if err != nil {
 			panic(err)
 		}
-		jsonfile := filepath.Dir(ex) +  "\\conf.json"
+		jsonfile := filepath.Dir(ex) + PATH_SEPARATOR + "conf.json"
 		if err != nil {
 			panic(err)
 	}

@@ -2,29 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08f1f7a7-61ee-4e0c-a6ff-62998c4fd982" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/conf.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configuration.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/configuration_template.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/debug.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generate.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MDaemon-2018-06-02-SMTP-(in).log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MDaemon-2018-06-03-SMTP-(in).log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MDaemon-2018-06-04-SMTP-(in).log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MDaemon-2018-06-05-SMTP-(in).log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MDaemon-2018-06-06-SMTP-(in).log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MDaemon-2018-06-07-SMTP-(in).log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blacklist.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/blacklist_hash.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/emailNotification.go" beforeDir="false" afterPath="$PROJECT_DIR$/emailNotification.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs_info.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/remove.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.exe" beforeDir="false" afterPath="$PROJECT_DIR$/debug.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scan_logs.go" beforeDir="false" afterPath="$PROJECT_DIR$/scan_logs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows_daemon.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service_windows.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,8 +22,26 @@
       <file leaf-file-name="scan_logs.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scan_logs.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="364" column="19" lean-forward="true" selection-start-line="364" selection-start-column="19" selection-end-line="364" selection-end-column="19" />
+            <state relative-caret-position="464">
+              <caret line="379" selection-start-line="379" selection-end-line="379" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="service_windows.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/service_windows.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="logs_info.dat" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/logs_info.dat">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="57">
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -58,8 +57,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>inter-kassa.com</find>
-      <find>url.</find>
       <find>section</find>
       <find>elog.Info(7,</find>
       <find>elog</find>
@@ -88,6 +85,8 @@
       <find>string</find>
       <find>strings</find>
       <find>fields</find>
+      <find>slice</find>
+      <find>\\</find>
     </findStrings>
     <replaceStrings>
       <replace>fmt.Printf(</replace>
@@ -155,8 +154,10 @@
         <option value="$PROJECT_DIR$/emailNotification.go" />
         <option value="$PROJECT_DIR$/service.go" />
         <option value="$PROJECT_DIR$/conf.json" />
-        <option value="$PROJECT_DIR$/scan_logs.go" />
         <option value="$PROJECT_DIR$/logs_info.dat" />
+        <option value="$PROJECT_DIR$/service_windows.go" />
+        <option value="$PROJECT_DIR$/service_unix.go" />
+        <option value="$PROJECT_DIR$/scan_logs.go" />
       </list>
     </option>
   </component>
@@ -170,8 +171,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="974" />
-    <option name="y" value="36" />
+    <option name="x" value="440" />
+    <option name="y" value="4" />
     <option name="width" value="640" />
     <option name="height" value="520" />
   </component>
@@ -208,12 +209,12 @@
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="GO_FMT" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;terminal&#9;ACTION&#9;ActivateTerminalToolWindow&#10;replace&#9;ACTION&#9;Replace&#10;blacklist_hash&#9;FILE&#9;file://C:/Users/u.anikin/go/src/windows_daemon/blacklist_hash.dat&#10;termi&#9;ACTION&#9;ActivateTerminalToolWindow&#10;increase&#9;ACTION&#9;EditorIncreaseFontSize&#10;increase f&#9;ACTION&#9;EditorIncreaseFontSize&#10;font size&#9;ACTION&#9;EditorIncreaseFontSize&#10;font si&#9;ACTION&#9;EditorIncreaseFontSize&#10;keymap&#9;ACTION&#9;Help.KeymapReference&#10;term&#9;ACTION&#9;ActivateTerminalToolWindow" />
+    <property name="SearchEverywhereHistoryKey" value="debug&#9;ACTION&#9;Debug&#10;terminal&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;replace&#9;ACTION&#9;Replace&#10;blacklist_hash&#9;FILE&#9;file://C:/Users/u.anikin/go/src/windows_daemon/blacklist_hash.dat&#10;termi&#9;ACTION&#9;ActivateTerminalToolWindow&#10;increase&#9;ACTION&#9;EditorIncreaseFontSize&#10;increase f&#9;ACTION&#9;EditorIncreaseFontSize&#10;font size&#9;ACTION&#9;EditorIncreaseFontSize&#10;font si&#9;ACTION&#9;EditorIncreaseFontSize&#10;keymap&#9;ACTION&#9;Help.KeymapReference&#10;term&#9;ACTION&#9;ActivateTerminalToolWindow" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../awesomeProject4" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -340,11 +341,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.debug" />
         <item itemvalue="Go Test.gobench windows_daemon" />
         <item itemvalue="Go Test.go test windows_daemon" />
         <item itemvalue="Go Build.start" />
         <item itemvalue="Go Build. install conf default" />
-        <item itemvalue="Go Build.debug" />
       </list>
     </recent_temporary>
   </component>
@@ -370,47 +371,59 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77842563" visible="true" weight="0.209375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.806962" visible="true" weight="0.209375" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4989339" weight="0.3278867" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3109375" side_tool="true" weight="0.31707317" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.309375" side_tool="true" visible="true" weight="0.32979852" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6966951" weight="0.48250264" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.690625" visible="true" weight="0.32979852" />
       <window_info id="Structure" order="1" sideWeight="0.22157435" side_tool="true" weight="0.19509594" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" visible="true" weight="0.1845175" />
-      <window_info id="Favorites" order="2" sideWeight="0.18396227" side_tool="true" weight="0.11666667" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" weight="0.1845175" />
+      <window_info id="Favorites" order="2" sideWeight="0.19303797" side_tool="true" visible="true" weight="0.209375" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.33722162" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77842563" visible="true" weight="0.209375" />
+      <window_info id="Structure" order="1" sideWeight="0.22157435" side_tool="true" weight="0.19509594" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4989339" weight="0.3278867" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6966951" weight="0.48250264" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="4" side_tool="true" weight="0.3296875" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49946696" visible="true" weight="0.32900432" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3109375" side_tool="true" weight="0.31707317" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.33722162" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32979852" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" visible="true" weight="0.1845175" />
+      <window_info id="Favorites" order="2" sideWeight="0.18396227" side_tool="true" weight="0.11666667" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77842563" visible="true" weight="0.209375" />
       <window_info id="Structure" order="1" sideWeight="0.22157435" side_tool="true" weight="0.19509594" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4989339" weight="0.3278867" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6966951" visible="true" weight="0.53340405" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32979852" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.33722162" />
       <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="4" side_tool="true" weight="0.3296875" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" weight="0.1845175" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3109375" side_tool="true" weight="0.31707317" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32979852" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49946696" visible="true" weight="0.32900432" />
       <window_info id="Favorites" order="2" sideWeight="0.18396227" side_tool="true" weight="0.11666667" />
     </layout-to-restore>
@@ -606,13 +619,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/scan_logs.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4864">
-          <caret line="266" column="9" selection-start-line="266" selection-start-column="9" selection-end-line="266" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scan_logs.go">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4335">
           <caret line="289" column="25" lean-forward="true" selection-start-line="289" selection-start-column="25" selection-end-line="289" selection-end-column="25" />
         </state>
@@ -632,7 +638,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service.go">
+    <entry file="file://$PROJECT_DIR$/service_windows.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="825">
           <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
@@ -660,7 +666,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service.go">
+    <entry file="file://$PROJECT_DIR$/service_windows.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
           <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
@@ -688,7 +694,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service.go">
+    <entry file="file://$PROJECT_DIR$/service_windows.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
           <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
@@ -856,24 +862,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="112" column="23" selection-start-line="112" selection-start-column="23" selection-end-line="112" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logs_info.dat">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
-          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service_windows.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/service_unix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="7" selection-start-column="7" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scan_logs.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="364" column="19" lean-forward="true" selection-start-line="364" selection-start-column="19" selection-end-line="364" selection-end-column="19" />
+        <state relative-caret-position="464">
+          <caret line="379" selection-start-line="379" selection-end-line="379" />
         </state>
       </provider>
     </entry>

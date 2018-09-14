@@ -31,7 +31,7 @@ func scan_logs()  {
 	ex, err := os.Executable()
 	chech(err)
 
-	jsonfile := filepath.Dir(ex) +  "\\conf.json"
+	jsonfile := filepath.Dir(ex) +  PATH_SEPARATOR + "conf.json"
 	if err != nil {
 		panic(err)
 	}
@@ -93,7 +93,7 @@ func scan_logs()  {
 
 	fmt.Printf("read logs_info\n")
 
-	root = logFilesPath+"\\logs_info.dat"
+	root = logFilesPath + PATH_SEPARATOR + "logs_info.dat"
 	logs_info := make([]string, 0)
 	dat_file, err := os.Open(root)
 	defer dat_file.Close()
@@ -111,7 +111,7 @@ func scan_logs()  {
 
 	file_names := make([]string, 0)
 
-	err = filepath.Walk(logFilesPath + "\\", func(path string, info os.FileInfo, err error) error {
+	err = filepath.Walk(logFilesPath + PATH_SEPARATOR, func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() && (info.Name() != filepath.Base(logFilesPath)) { //skip all directories excluding root directory
 			return filepath.SkipDir
 		}
@@ -131,9 +131,9 @@ func scan_logs()  {
 	} else {
 		//remove logs_info because there no log files in directory
 		dat_file.Close()
-		err = os.Remove(logFilesPath + "\\logs_info.dat")
+		err = os.Remove(logFilesPath + PATH_SEPARATOR + "logs_info.dat")
 		chech(err)
-		fmt.Printf(fmt.Sprintf("...buuut no log files found in %s\\", logFilesPath))
+		fmt.Printf(fmt.Sprintf("...buuut no log files found in %s%s", logFilesPath, PATH_SEPARATOR))
 		return
 	}
 
@@ -184,7 +184,7 @@ func scan_logs()  {
 			chech(err)
 
 			var new_log_file_size int64
-			fi, err := os.Stat(logFilesPath + "\\" + log_name)
+			fi, err := os.Stat(logFilesPath + PATH_SEPARATOR + log_name)
 			if err == nil {
 				// get the size
 				new_log_file_size = fi.Size()
@@ -216,7 +216,7 @@ func scan_logs()  {
 
 			fmt.Printf(fmt.Sprintf("\ndecided what to do with file %s. Scan from %d to %d.\n", log_name, offset, new_log_file_size))
 
-			report, found, err := analyze(logFilesPath+"\\"+log_name, offset, banned_urls) //analyze current log file
+			report, found, err := analyze(logFilesPath+PATH_SEPARATOR+log_name, offset, banned_urls) //analyze current log file
 
 			if os.IsNotExist(err) {
 				fmt.Printf(".. aaand it's not found. Error: "+err.Error())
@@ -230,7 +230,7 @@ func scan_logs()  {
 			}
 		}
 
-	root = logFilesPath + "\\logs_info.dat" //write logs_info
+	root = logFilesPath + PATH_SEPARATOR + "logs_info.dat" //write logs_info
 	err = ioutil.WriteFile(root, []byte(dat), 0466)
 	chech(err)
 		if blacklist_changed {
@@ -339,12 +339,12 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 						log_entry=""
 
 						for i := range slices {
-							log_entry += slices[i]
+							log_entry += slices[i] + " "
 						}
 
 						//time.Unix(secs, 0)
 
-						report += "\n\n\n##############\n" + "Found banned \""+ banned + "\" in section: \n" + log_entry
+						report += "\n\n\n..........\nFound banned \"" + banned + "\" in section: \n" + log_entry
 
 						var flag bool = false
 						for _, ip := range ips {
@@ -373,11 +373,10 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 	var sheet string
 	sheet = fmt.Sprintf("\n\n\nMdaemon Log analyzer REPORT for file: %s \r\nFound %d suspicious events!: ", log_name, found)
 	for url, count := range banned_report {
-		sheet += fmt.Sprintf("%d %s, ", count, url)
+		sheet += fmt.Sprintf("%d times: %s; ", count, url)
 		lines++
 		if lines==10 { sheet += "\n" }
 	}
-	sheet += fmt.Sprintf("\b\b  ")
 	sheet += report
 
 	return sheet, found, err
