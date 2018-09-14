@@ -1,0 +1,17 @@
+{
+  "from": {
+    "name": "",
+    "email": ""
+  },
+  "to": {
+    "name": "",
+    "email": ""
+  },
+  "subject": "",
+  "server": "",
+  "port": "",
+  "interval": "",
+  "blacklistRoot": "",
+  "blacklistName": "",
+  "logFilesPath": "",
+}

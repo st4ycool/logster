@@ -1,10 +1,5 @@
 ###########################################
-Name Offset Size
-
-MDaemon-2018-06-02-SMTP-(in).log 11708331 11708331
-MDaemon-2018-06-03-SMTP-(in).log 11708331 11708331
-MDaemon-2018-06-04-SMTP-(in).log 11708331 11708331
-MDaemon-2018-06-05-SMTP-(in).log 11708331 11708331
-MDaemon-2018-06-06-SMTP-(in).log 11708331 11708331
-MDaemon-2018-06-07-SMTP-(in).log 11708331 11708331
-MDaemon-2018-06-08-SMT-(in).log 13946961 13946961
+Name 				 Offset
+access3.log 1901615021
+access.log 557123643
+access2.log 1839698458
