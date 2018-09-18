@@ -2,10 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08f1f7a7-61ee-4e0c-a6ff-62998c4fd982" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/windows_daemon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/windows_daemon.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug.exe" beforeDir="false" afterPath="$PROJECT_DIR$/debug.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/conf.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration.go" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration_template.json" beforeDir="false" afterPath="$PROJECT_DIR$/configuration_template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/emailNotification.go" beforeDir="false" afterPath="$PROJECT_DIR$/emailNotification.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/install.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs_info.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manage.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scan_logs.go" beforeDir="false" afterPath="$PROJECT_DIR$/scan_logs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service_windows.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service.go" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,6 +23,20 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="windows_daemon" />
@@ -22,26 +46,29 @@
       <file leaf-file-name="scan_logs.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scan_logs.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="379" selection-start-line="379" selection-end-line="379" />
+            <state relative-caret-position="475">
+              <caret line="386" column="1" lean-forward="true" selection-start-line="386" selection-start-column="1" selection-end-line="386" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="service_windows.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/service_windows.go">
+      <file leaf-file-name="emailNotification.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/emailNotification.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="17" />
+            <state relative-caret-position="380">
+              <caret line="47" column="49" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="49" />
+              <folding>
+                <element signature="e#14#74#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="logs_info.dat" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/logs_info.dat">
+      <file leaf-file-name="configuration.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/configuration.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+            <state relative-caret-position="437">
+              <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -57,28 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>section</find>
-      <find>elog.Info(7,</find>
-      <find>elog</find>
-      <find>unma</find>
-      <find>c</find>
-      <find>data</find>
-      <find>conf</find>
-      <find>dir</find>
-      <find>root</find>
-      <find>mode</find>
-      <find>&quot;)</find>
-      <find>working in direc</find>
-      <find>progress</find>
-      <find>updated</find>
-      <find>dat</find>
-      <find>logs_info</find>
-      <find>blacklist</find>
-      <find>blacklistpath</find>
-      <find>hash_</find>
-      <find>stl-tender.ru</find>
-      <find>found</find>
-      <find>banned_urls</find>
       <find>runnning</find>
       <find>scan from the</find>
       <find>wor</find>
@@ -87,6 +92,28 @@
       <find>fields</find>
       <find>slice</find>
       <find>\\</find>
+      <find>report</find>
+      <find>Search</find>
+      <find>eki</find>
+      <find>log</find>
+      <find>read has</find>
+      <find>parse</find>
+      <find>found</find>
+      <find>elog</find>
+      <find>split</find>
+      <find>logs_info</find>
+      <find>logs_info.dat</find>
+      <find>write</find>
+      <find>\</find>
+      <find>\conf</find>
+      <find>root</find>
+      <find>Unable to find configuration file</find>
+      <find>syntax</find>
+      <find>func</find>
+      <find>unable</find>
+      <find>conf.json</find>
+      <find>smtp</find>
+      <find>time</find>
     </findStrings>
     <replaceStrings>
       <replace>fmt.Printf(</replace>
@@ -113,7 +140,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="proxyLinux" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="WARN_ABOUT_CRLF" value="false" />
@@ -143,20 +170,21 @@
         <option value="$PROJECT_DIR$/configure.go" />
         <option value="$PROJECT_DIR$/11.go" />
         <option value="$PROJECT_DIR$/conf" />
-        <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/blacklist.txt" />
         <option value="$APPLICATION_CONFIG_DIR$/idea.properties" />
-        <option value="$PROJECT_DIR$/configuration_template.json" />
-        <option value="$PROJECT_DIR$/configuration.go" />
         <option value="$PROJECT_DIR$/generate.go" />
-        <option value="$PROJECT_DIR$/blacklist_proxy.txt" />
-        <option value="$PROJECT_DIR$/blacklist_fresh.txt" />
-        <option value="$PROJECT_DIR$/emailNotification.go" />
-        <option value="$PROJECT_DIR$/service.go" />
-        <option value="$PROJECT_DIR$/conf.json" />
-        <option value="$PROJECT_DIR$/logs_info.dat" />
         <option value="$PROJECT_DIR$/service_windows.go" />
         <option value="$PROJECT_DIR$/service_unix.go" />
+        <option value="$PROJECT_DIR$/blacklist_proxy.txt" />
+        <option value="$PROJECT_DIR$/blacklist_fresh.txt" />
+        <option value="$PROJECT_DIR$/mbsSearch.go" />
+        <option value="$PROJECT_DIR$/service.go" />
+        <option value="$PROJECT_DIR$/main.go" />
+        <option value="$PROJECT_DIR$/configuration.go" />
+        <option value="$PROJECT_DIR$/configuration_template.json" />
+        <option value="$PROJECT_DIR$/conf.json" />
+        <option value="$PROJECT_DIR$/logs_info.dat" />
+        <option value="$PROJECT_DIR$/emailNotification.go" />
         <option value="$PROJECT_DIR$/scan_logs.go" />
       </list>
     </option>
@@ -171,8 +199,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="440" />
-    <option name="y" value="4" />
+    <option name="x" value="974" />
+    <option name="y" value="36" />
     <option name="width" value="640" />
     <option name="height" value="520" />
   </component>
@@ -209,15 +237,15 @@
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="GO_FMT" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="debug&#9;ACTION&#9;Debug&#10;terminal&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;replace&#9;ACTION&#9;Replace&#10;blacklist_hash&#9;FILE&#9;file://C:/Users/u.anikin/go/src/windows_daemon/blacklist_hash.dat&#10;termi&#9;ACTION&#9;ActivateTerminalToolWindow&#10;increase&#9;ACTION&#9;EditorIncreaseFontSize&#10;increase f&#9;ACTION&#9;EditorIncreaseFontSize&#10;font size&#9;ACTION&#9;EditorIncreaseFontSize&#10;font si&#9;ACTION&#9;EditorIncreaseFontSize&#10;keymap&#9;ACTION&#9;Help.KeymapReference&#10;term&#9;ACTION&#9;ActivateTerminalToolWindow" />
+    <property name="SearchEverywhereHistoryKey" value="term&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;termin&#9;ACTION&#9;ActivateTerminalToolWindow&#10;terminal&#9;ACTION&#9;ActivateTerminalToolWindow&#10;sett&#9;ACTION&#9;ShowSettings&#10;project settings&#9;ACTION&#9;ProjectViewPopupMenuSettingsGroup&#10;debug&#9;ACTION&#9;Debug&#10;replace&#9;ACTION&#9;Replace&#10;blacklist_hash&#9;FILE&#9;file://C:/Users/u.anikin/go/src/windows_daemon/blacklist_hash.dat&#10;termi&#9;ACTION&#9;ActivateTerminalToolWindow&#10;increase&#9;ACTION&#9;EditorIncreaseFontSize&#10;increase f&#9;ACTION&#9;EditorIncreaseFontSize&#10;font size&#9;ACTION&#9;EditorIncreaseFontSize&#10;font si&#9;ACTION&#9;EditorIncreaseFontSize&#10;keymap&#9;ACTION&#9;Help.KeymapReference" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../awesomeProject4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../EpochToGmt" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoProjectSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -241,7 +269,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Build.debug">
+  <component name="RunManager" selected="Go Build.windows_daemon">
     <configuration name=" install conf default" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="windows_daemon" />
       <working_directory value="$PROJECT_DIR$" />
@@ -306,7 +334,6 @@
       <module name="windows_daemon" />
       <working_directory value="$PROJECT_DIR$/" />
       <go_parameters value="-i" />
-      <parameters value="install" />
       <kind value="DIRECTORY" />
       <filePath value="$PROJECT_DIR$/" />
       <directory value="$PROJECT_DIR$/" />
@@ -341,11 +368,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.debug" />
         <item itemvalue="Go Test.gobench windows_daemon" />
         <item itemvalue="Go Test.go test windows_daemon" />
         <item itemvalue="Go Build.start" />
         <item itemvalue="Go Build. install conf default" />
+        <item itemvalue="Go Build.debug" />
       </list>
     </recent_temporary>
   </component>
@@ -373,37 +400,26 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.806962" visible="true" weight="0.209375" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77842563" visible="true" weight="0.2171875" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4989339" weight="0.3278867" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.309375" side_tool="true" visible="true" weight="0.32979852" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3109375" side_tool="true" weight="0.31707317" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.690625" visible="true" weight="0.32979852" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6966951" weight="0.27147403" />
       <window_info id="Structure" order="1" sideWeight="0.22157435" side_tool="true" weight="0.19509594" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" weight="0.1845175" />
-      <window_info id="Favorites" order="2" sideWeight="0.19303797" side_tool="true" visible="true" weight="0.209375" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" visible="true" weight="0.31177095" />
+      <window_info id="Favorites" order="2" sideWeight="0.18396227" side_tool="true" weight="0.11666667" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.33722162" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77842563" visible="true" weight="0.209375" />
-      <window_info id="Structure" order="1" sideWeight="0.22157435" side_tool="true" weight="0.19509594" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4989339" weight="0.3278867" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6966951" weight="0.48250264" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="4" side_tool="true" weight="0.3296875" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49946696" visible="true" weight="0.32900432" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3109375" side_tool="true" weight="0.31707317" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.33722162" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32979852" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" visible="true" weight="0.1845175" />
-      <window_info id="Favorites" order="2" sideWeight="0.18396227" side_tool="true" weight="0.11666667" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="4" side_tool="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49946696" visible="true" weight="0.32900432" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -488,27 +504,29 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/generate.go</url>
-          <line>23</line>
-          <option name="timeStamp" value="193" />
-        </line-breakpoint>
-        <line-breakpoint type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/scan_logs.go</url>
-          <line>88</line>
-          <option name="timeStamp" value="290" />
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://C:/Go/src/net/smtp/smtp.go</url>
+          <line>319</line>
+          <properties />
+          <option name="timeStamp" value="312" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/scan_logs.go</url>
-          <line>331</line>
-          <option name="timeStamp" value="297" />
+          <url>file://$PROJECT_DIR$/emailNotification.go</url>
+          <line>47</line>
+          <properties />
+          <option name="timeStamp" value="316" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="298" />
+      <option name="time" value="317" />
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GoApplicationRunConfiguration">
+        <watch expression="ips" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
@@ -617,34 +635,7 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/scan_logs.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4335">
-          <caret line="289" column="25" lean-forward="true" selection-start-line="289" selection-start-column="25" selection-end-line="289" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/install.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service_windows.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/service_windows.go" />
     <entry file="file://$PROJECT_DIR$/scan_logs.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3553">
@@ -652,55 +643,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/install.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service_windows.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scan_logs.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3553">
-          <caret line="209" selection-start-line="209" selection-end-line="210" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/install.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" column="5" selection-start-line="43" selection-start-column="5" selection-end-line="43" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service_windows.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/install.go" />
+    <entry file="file://$PROJECT_DIR$/manage.go" />
+    <entry file="file://$PROJECT_DIR$/service_windows.go" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-06-18-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-06-17-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-06-16-SMTP-(in).log" />
@@ -709,13 +654,6 @@
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-05-17-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-06-19-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/blacklist_d.txt" />
-    <entry file="file://C:/Go/src/runtime/asm_amd64.s">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10868">
-          <caret line="572" selection-start-line="572" selection-end-line="572" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Go/src/os/types.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
@@ -728,20 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
           <caret line="39" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/runtime/panic.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="587" selection-start-line="587" selection-end-line="587" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/Go/src/os/file_windows.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="859">
-          <caret line="174" selection-start-line="174" selection-end-line="174" />
         </state>
       </provider>
     </entry>
@@ -763,27 +687,6 @@
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-07-31-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-07-30-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/blacklist.txt" />
-    <entry file="file://$PROJECT_DIR$/install.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-32">
-          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configuration_template.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-95">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Go/src/golang.org/x/sys/windows/svc/service.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-520">
@@ -791,45 +694,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/configuration.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Go/src/bufio/scan.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="219">
           <caret line="106" selection-start-line="106" selection-end-line="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/generate.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="54" column="63" selection-start-line="54" selection-start-column="63" selection-end-line="54" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blacklist_proxy.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="103" column="14" selection-start-line="103" selection-start-column="14" selection-end-line="103" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blacklist_fresh.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="75" column="13" lean-forward="true" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -841,52 +709,137 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Go/src/net/smtp/smtp.go">
+    <entry file="file://$PROJECT_DIR$/service_windows.go" />
+    <entry file="file://$PROJECT_DIR$/service_unix.go" />
+    <entry file="file://$PROJECT_DIR$/blacklist_proxy.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="631">
+          <caret line="106" selection-start-line="106" selection-end-line="106" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/conf.json">
+    <entry file="file://$PROJECT_DIR$/blacklist_fresh.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="83" selection-start-line="11" selection-start-column="83" selection-end-line="11" selection-end-column="83" />
+        <state>
+          <caret column="11" selection-start-column="11" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/emailNotification.go">
+    <entry file="file://$PROJECT_DIR$/mbsSearch.go" />
+    <entry file="file://$PROJECT_DIR$/manage.go" />
+    <entry file="file://$PROJECT_DIR$/install.go" />
+    <entry file="file://$PROJECT_DIR$/service.go" />
+    <entry file="file://$PROJECT_DIR$/generate.go" />
+    <entry file="file://C:/Go/src/os/error.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-618">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
+        <state relative-caret-position="323">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/os/file_windows.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="176" selection-start-line="176" selection-end-line="176" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/runtime/proc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="151" selection-start-line="151" selection-end-line="151" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/runtime/panic.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="508" selection-start-line="508" selection-end-line="508" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/runtime/asm_amd64.s">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="572" selection-start-line="572" selection-end-line="572" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calcMd5File.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-157" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configuration_template.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/logs_info.dat">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service_windows.go">
+    <entry file="file://C:/Go/src/net/smtp/smtp.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="17" />
+        <state relative-caret-position="269">
+          <caret line="341" selection-start-line="341" selection-end-line="341" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service_unix.go">
+    <entry file="file://C:/Go/src/log/log.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="7" selection-start-column="7" selection-end-column="7" />
+        <state relative-caret-position="213">
+          <caret line="325" selection-start-line="325" selection-end-line="325" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="29" selection-start-line="15" selection-start-column="4" selection-end-line="18" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../github.com/gomail-master/message.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="209" column="39" selection-start-line="209" selection-start-column="39" selection-end-line="209" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emailNotification.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="47" column="49" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="49" />
+          <folding>
+            <element signature="e#14#74#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configuration.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scan_logs.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="379" selection-start-line="379" selection-end-line="379" />
+        <state relative-caret-position="475">
+          <caret line="386" column="1" lean-forward="true" selection-start-line="386" selection-start-column="1" selection-end-line="386" selection-end-column="1" />
         </state>
       </provider>
     </entry>

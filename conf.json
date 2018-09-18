@@ -7,9 +7,17 @@
 		"name": "Yuri Anikin",
 		"email": "u.anikin@morskoybank.com"
 	},
+	"to": {
+		"name": "Evgeny Krasnov",
+		"email": "e.krasnov@morskoybank.com"
+	},
 	"server": "mail.lan",
 	"port": "25",
+	"auth": {
+		"login": "u.anikin@morskoybank.com",
+		"password": "Post_18052018"
+	},
 	"blacklistPath": "C:\\Users\\u.anikin\\go\\src\\windows_daemon\\blacklist_proxy.txt",
 	"logFilesPath": "C:\\Users\\u.anikin\\go\\src\\windows_daemon",
-	"interval": "30"
+	"interval": "15"
 }

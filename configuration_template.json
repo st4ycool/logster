@@ -7,11 +7,9 @@
     "name": "",
     "email": ""
   },
-  "subject": "",
   "server": "",
   "port": "",
   "interval": "",
-  "blacklistRoot": "",
-  "blacklistName": "",
-  "logFilesPath": "",
+  "blacklistPath": "",
+  "logFilesPath": ""
 }

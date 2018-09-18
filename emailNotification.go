@@ -1,76 +1,32 @@
 package main
 
 import (
-	"net/smtp"
-	"log"
+	"fmt"
 	"os"
+	"log"
 	"io/ioutil"
 	"encoding/json"
-	"fmt"
-	"path/filepath"
+	"github.com/gomail-master"
+	"crypto/tls"
 )
 
-func alertMail (subject string, msg string){
+func alertMail (subject string, msg string) {
+		jsonfile := "./conf.json"
 
-		ex, err := os.Executable()
-		if err != nil {
-			panic(err)
+		if _, err := os.Stat(jsonfile); err != nil {
+			log.Fatalf("Unable to find configuration file (%s).\n", jsonfile)
+			return
 		}
-		jsonfile := filepath.Dir(ex) +  "\\conf.json"
+		data, err := ioutil.ReadFile(jsonfile)
 		if err != nil {
-			panic(err)
+			log.Fatalln(err)
 		}
-
-	if _, err := os.Stat(jsonfile); err != nil {
-	log.Fatalf("Unable to find configuration file (%s).\n", jsonfile)
-	return
-	}
-	data, err := ioutil.ReadFile(jsonfile)
-	if err != nil {
-	log.Fatalln(err)
-	}
-	c := &Config{}
-	err = json.Unmarshal(data, c)
-	if err != nil {
-	log.Println(err)
-	return
-	}
-
-	var (
-		from     = fmt.Sprintf(`"%s" <%s>`, c.From.Name, c.From.Email)
-		to       = fmt.Sprintf(`"%s" <%s>`, c.To.Name, c.To.Email)
-		server   = c.Server
-		port     = c.Port
-	)
-
-	//if interval[0] == '+' || interval[0] == '-' {
-	//	interval = strings.Replace(interval, string(interval[0]), "", -1)
-	//}
-
-	headers := make(map[string]string)
-	headers["From"] = from
-	headers["To"] = to
-
-	// Connect to the remote SMTP server.
-cd, err := smtp.Dial(server+":"+port)
-if err != nil {
-log.Fatal(err)
-}
-
-// Set the sender and recipient first
-if err := cd.Mail(headers["From"]); err != nil {
-log.Fatal(err)
-}
-
-if err := cd.Rcpt(headers["To"]); err != nil {
-		log.Fatal(err)
-	}
-
-// Send the email body.
-wc, err := cd.Data()
-if err != nil {
-log.Fatal(err)
-}
+		c := &Config{}
+		err = json.Unmarshal(data, c)
+		if err != nil {
+			log.Println(err)
+			return
+		}
 
 
 	report := fmt.Sprintf("\n               _                                  _                               _                         	")
@@ -87,26 +43,23 @@ log.Fatal(err)
 	report += fmt.Sprintf("\n			    |    /|  __||  __/| | | |    /  | |")
 	report += fmt.Sprintf("\n			    | |\\ \\| |___| |   \\ \\_/ / |\\ \\  | |")
 	report += fmt.Sprintf("\n			    \\_| \\_\\____/\\_|    \\___/\\_| \\_| \\_/")
-
 	report += msg
 
-_, err = fmt.Fprintf(wc, "From: " + headers["From"] + "\r\n" +
-"To: " + headers["To"] + "\r\n" +
-"Subject: " + subject + "\r\n" +
-"\r\n" + report)
+	d := gomail.NewDialer(c.Server, 25, c.From.Email, c.Auth.Password)
+	d.TLSConfig = &tls.Config{InsecureSkipVerify: true}
 
-if err != nil {
-log.Fatal(err)
+	m := gomail.NewMessage()
+	m.SetHeader("From", c.From.Email)
+	m.SetHeader("To", c.To.Email)
+	m.SetAddressHeader("Cc", c.From.Email, c.From.Name)
+	m.SetHeader("Subject", subject)
+	m.SetBody("", report)
+	//m.Attach("/home/Alex/lolcat.jpg")
+
+	// Send the email
+	if err := d.DialAndSend(m); err != nil {
+		panic(err)
+	}
+
 }
 
-err = wc.Close()
-if err != nil {
-log.Fatal(err)
-}
-
-// Send the QUIT command and close the connection.
-err = cd.Quit()
-if err != nil {
-log.Fatal(err)
-}
-}

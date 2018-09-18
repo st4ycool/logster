@@ -26,18 +26,19 @@ func scan_logs()  {
 		blacklist_changed bool = false
 		log_name string
 		offset int64
-		)
+	)
 
 	ex, err := os.Executable()
 	chech(err)
 
-	jsonfile := filepath.Dir(ex) +  PATH_SEPARATOR + "conf.json"
+	jsonfile := "./conf.json"
 	if err != nil {
 		panic(err)
 	}
 
 	if _, err := os.Stat(jsonfile); err != nil {
-		log.Fatalf("Unable to find configuration file (%s).\n", jsonfile)
+		log.Fatalf("Unable to find configuration file [%s].\n", jsonfile)
+		log.Fatalf("Error: %s", err.Error())
 		return
 	}
 	data, err := ioutil.ReadFile(jsonfile)
@@ -47,7 +48,6 @@ func scan_logs()  {
 	c := &Config{}
 	err = json.Unmarshal(data, c)
 	if err != nil {
-		elog.Info(200, err.Error())
 		println(err)
 		return
 	}
@@ -93,7 +93,7 @@ func scan_logs()  {
 
 	fmt.Printf("read logs_info\n")
 
-	root = logFilesPath + PATH_SEPARATOR + "logs_info.dat"
+	root = "./logs_info.dat"
 	logs_info := make([]string, 0)
 	dat_file, err := os.Open(root)
 	defer dat_file.Close()
@@ -111,7 +111,7 @@ func scan_logs()  {
 
 	file_names := make([]string, 0)
 
-	err = filepath.Walk(logFilesPath + PATH_SEPARATOR, func(path string, info os.FileInfo, err error) error {
+	err = filepath.Walk(logFilesPath + "/", func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() && (info.Name() != filepath.Base(logFilesPath)) { //skip all directories excluding root directory
 			return filepath.SkipDir
 		}
@@ -131,9 +131,9 @@ func scan_logs()  {
 	} else {
 		//remove logs_info because there no log files in directory
 		dat_file.Close()
-		err = os.Remove(logFilesPath + PATH_SEPARATOR + "logs_info.dat")
+		err = os.Remove("./logs_info.dat")
 		chech(err)
-		fmt.Printf(fmt.Sprintf("...buuut no log files found in %s%s", logFilesPath, PATH_SEPARATOR))
+		fmt.Printf(fmt.Sprintf("...buuut no log files found in %s%s", logFilesPath, "/"))
 		return
 	}
 
@@ -177,68 +177,68 @@ func scan_logs()  {
 
 	//okay, now we have full, truly actual log files list in logs_dat. Let's analyze them:
 
-		for z := range logs_info {
-			info := strings.Fields(logs_info[z]) //every line contains: log file name, offset(where ananlyze ended last time with that file)
-			log_name = info[0]
-			offset, err = strconv.ParseInt(info[1], 10, 64)
+	for z := range logs_info {
+		info := strings.Fields(logs_info[z]) //every line contains: log file name, offset(where ananlyze ended last time with that file)
+		log_name = info[0]
+		offset, err = strconv.ParseInt(info[1], 10, 64)
+		chech(err)
+
+		var new_log_file_size int64
+		fi, err := os.Stat(logFilesPath + "/" + log_name)
+		if err == nil {
+			// get the size
+			new_log_file_size = fi.Size()
 			chech(err)
 
-			var new_log_file_size int64
-			fi, err := os.Stat(logFilesPath + PATH_SEPARATOR + log_name)
-			if err == nil {
-				// get the size
-				new_log_file_size = fi.Size()
+			if new_log_file_size > offset {
+				logs_info[z] = fmt.Sprintf("%s %d", log_name, new_log_file_size)
 				chech(err)
-
-				if new_log_file_size > offset {
-					logs_info[z] = fmt.Sprintf("%s %d", log_name, new_log_file_size)
-					chech(err)
-				}
-
-				if blacklist_changed == true {
-					offset = 0
-				} else {
-					offset, err = strconv.ParseInt(info[1], 10, 64)
-					chech(err)
-				}
 			}
 
-			if offset == 0 {
-				fmt.Printf("\n%s file never been scanned. Scan from the bottom!", info[0])
-			} else if offset == new_log_file_size {
-				dat += "\r\n" + logs_info[z]
-				fmt.Printf("\n%s file size hasn't been changed! Scan skipped.", info[0])
-				continue
-			} else if offset < new_log_file_size {
-				fmt.Printf("case 3!\n")
-				fmt.Printf("\n%s file have been scanned before. Start scan where it's been ended.", info[0])
-			}
-
-			fmt.Printf(fmt.Sprintf("\ndecided what to do with file %s. Scan from %d to %d.\n", log_name, offset, new_log_file_size))
-
-			report, found, err := analyze(logFilesPath+PATH_SEPARATOR+log_name, offset, banned_urls) //analyze current log file
-
-			if os.IsNotExist(err) {
-				fmt.Printf(".. aaand it's not found. Error: "+err.Error())
-			} else if err == nil {
-				rar := fmt.Sprintf("\r\n%s %d", log_name, new_log_file_size)
-				dat += rar
-
-				if found > 0 {
-					alertMail(fmt.Sprintf("Alert-report for file %s! %d suspicious events!", log_name, found), report)
-				}
+			if blacklist_changed == true {
+				offset = 0
+			} else {
+				offset, err = strconv.ParseInt(info[1], 10, 64)
+				chech(err)
 			}
 		}
 
-	root = logFilesPath + PATH_SEPARATOR + "logs_info.dat" //write logs_info
+		if offset == 0 {
+			fmt.Printf("\n%s file never been scanned. Scan from the bottom!", info[0])
+		} else if offset == new_log_file_size {
+			dat += "\r\n" + logs_info[z]
+			fmt.Printf("\n%s file size hasn't been changed! Scan skipped.", info[0])
+			continue
+		} else if offset < new_log_file_size {
+			fmt.Printf("case 3!\n")
+			fmt.Printf("\n%s file have been scanned before. Start scan where it's been ended.", info[0])
+		}
+
+		fmt.Printf(fmt.Sprintf("\ndecided what to do with file %s. Scan from %d to %d.\n", log_name, offset, new_log_file_size))
+
+		report, found, err := analyze(logFilesPath + "/" + log_name, offset, banned_urls) //analyze current log file
+
+		if os.IsNotExist(err) {
+			fmt.Printf(".. aaand it's not found. Error: "+err.Error())
+		} else if err == nil {
+			rar := fmt.Sprintf("\r\n%s %d", log_name, new_log_file_size)
+			dat += rar
+
+			if found > 0 {
+				alertMail(fmt.Sprintf("Alert-report for file %s! %d suspicious events!", log_name, found), report)
+			}
+		}
+	}
+
+	root = "./logs_info.dat" //write logs_info
 	err = ioutil.WriteFile(root, []byte(dat), 0466)
 	chech(err)
-		if blacklist_changed {
-			root = blacklistPath + "_hash"				 //write blacklist_hash
-			err = ioutil.WriteFile(root, []byte(new_hash_blacklist), 0466) // if everything ok, write new hash of blacklist.
-			chech(err)
-			println("\r\nblacklist hash written successfully:\r\n" + new_hash_blacklist)
-		}
+	if blacklist_changed {
+		root = blacklistPath + "_hash"				 //write blacklist_hash
+		err = ioutil.WriteFile(root, []byte(new_hash_blacklist), 0466) // if everything ok, write new hash of blacklist.
+		chech(err)
+		println("\r\nblacklist hash written successfully:\r\n" + new_hash_blacklist)
+	}
 }
 
 func analyze(log_name string, offset int64, banned_urls []string) (string, int, error) {
@@ -300,12 +300,12 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 		//	log_entry += "\n" + scanner.Text() //log entry means 1 section of log/1 event
 		//	if !scanner.Scan() {break} //break cycle if there are nothing more to scan
 
-			progress++
-			if progress%1000 == 0 {
-				off,_ := log_file.Seek(0, 1)
-				fmt.Printf("\r......Scanned: %d lines of log. Size: %d / %d MB......", progress, off/1000000, new_log_file_size/1000000)
+		progress++
+		if progress%1000 == 0 {
+			off,_ := log_file.Seek(0, 1)
+			fmt.Printf("\r......Scanned: %d lines of log. Size: %d / %d MB......", progress, off/1000000, new_log_file_size/1000000)
 
-			}
+		}
 		//} todo:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		//if sectionMarkFound == true {
@@ -329,20 +329,17 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 							banned_report[banned]++
 						} else { banned_report[banned] = 1 }
 
-						slices := strings.Fields(log_entry)
-						a:=strings.Split(slices[0], ".")
-						timestamp, err := strconv.ParseInt(a[0], 10, 64)
+						slices:= strings.Fields(log_entry)
+						aaa:=strings.Split(slices[0], ".")
+						times, err := strconv.ParseInt(aaa[0], 10, 64)
 						chech(err)
-						noEpochtime := time.Unix(timestamp, 0)		// Epoch time to normal time
-						slices[0] = noEpochtime.String()
+						slices[0] = time.Unix(times, 0).String()	// Epoch time to normal time
 
 						log_entry=""
 
 						for i := range slices {
 							log_entry += slices[i] + " "
 						}
-
-						//time.Unix(secs, 0)
 
 						report += "\n\n\n..........\nFound banned \"" + banned + "\" in section: \n" + log_entry
 
@@ -353,20 +350,20 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 							}
 							if flag {
 								ip+=banned
-								}
 							}
 						}
 					}
 				}
 			}
 		}
+	}
 	//} todo:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	if ips != nil {
-	for _,ipd := range ips {
-		report+= fmt.Sprintf(" %s", ipd)
-	}
-	fmt.Printf(report)
+		for _,ipd := range ips {
+			report+= fmt.Sprintf(" %s", ipd)
+		}
+		fmt.Printf(report)
 	}
 
 	lines:=0
@@ -377,6 +374,7 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 		lines++
 		if lines==10 { sheet += "\n" }
 	}
+	sheet += "\nTIME: " + time.Now().String() + "\n"
 	sheet += report
 
 	return sheet, found, err
@@ -384,7 +382,6 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 
 func chech (err error) {
 	if err != nil {
-		elog.Info(200, err.Error())
 		println("\n\n" + err.Error())
 	}
 }
