@@ -46,10 +46,9 @@ func main() {
 		scan_logs()
 		select {
 		case <-tick:
-			timestamp := time.Now()
-			p := fmt.Printf
-			p(timestamp.Format(time.RFC3339Nano))
-			fmt.Printf( "\n\n%s ... Tick! New log analyze iteration start\n", timestamp )
+			a := time.Now().String() // why time appears with some trash in the tail?
+			clearTime := a[:len(a)-29]
+			fmt.Printf( "\n\n%s ... Tick! New log analyze iteration start\n", clearTime )
 		}
 	}
 }

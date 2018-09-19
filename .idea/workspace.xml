@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08f1f7a7-61ee-4e0c-a6ff-62998c4fd982" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/windows_daemon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/windows_daemon.iml" afterDir="false" />
+    <list default="true" id="08f1f7a7-61ee-4e0c-a6ff-62998c4fd982" name="Default" comment="New blacklist write/read and scan mode&#10;&#10;&#10;Removed writing/reading blacklist hash, now it's just offset in logs_dat. No full scan through blacklist, only added.&#10;Also now if new blacklist item added log will be scanned from beginning only for newly added blacklist items.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/conf.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration.go" beforeDir="false" afterPath="$PROJECT_DIR$/configuration.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration_template.json" beforeDir="false" afterPath="$PROJECT_DIR$/configuration_template.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/emailNotification.go" beforeDir="false" afterPath="$PROJECT_DIR$/emailNotification.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generate.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/install.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs_info.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scan_logs.go" beforeDir="false" afterPath="$PROJECT_DIR$/scan_logs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service.go" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,29 +33,8 @@
       <file leaf-file-name="scan_logs.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scan_logs.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="386" column="1" lean-forward="true" selection-start-line="386" selection-start-column="1" selection-end-line="386" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="emailNotification.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/emailNotification.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="47" column="49" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="49" />
-              <folding>
-                <element signature="e#14#74#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="configuration.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/configuration.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="9" />
+            <state relative-caret-position="93">
+              <caret line="321" column="32" lean-forward="true" selection-start-line="321" selection-start-column="32" selection-end-line="321" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -84,24 +50,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>runnning</find>
-      <find>scan from the</find>
-      <find>wor</find>
-      <find>string</find>
-      <find>strings</find>
-      <find>fields</find>
-      <find>slice</find>
-      <find>\\</find>
-      <find>report</find>
-      <find>Search</find>
-      <find>eki</find>
-      <find>log</find>
-      <find>read has</find>
-      <find>parse</find>
-      <find>found</find>
       <find>elog</find>
       <find>split</find>
-      <find>logs_info</find>
       <find>logs_info.dat</find>
       <find>write</find>
       <find>\</find>
@@ -114,6 +64,22 @@
       <find>conf.json</find>
       <find>smtp</find>
       <find>time</find>
+      <find>time.u</find>
+      <find>name</find>
+      <find>Name</find>
+      <find>&quot;.&quot;</find>
+      <find>scanner.sca</find>
+      <find>new_log</find>
+      <find>log files offse</find>
+      <find>logs_info</find>
+      <find>http</find>
+      <find>dec</find>
+      <find>decided</find>
+      <find>time.now</find>
+      <find>use_only_new_blacklist_items</find>
+      <find>tick</find>
+      <find>blacklist</find>
+      <find>compare</find>
     </findStrings>
     <replaceStrings>
       <replace>fmt.Printf(</replace>
@@ -124,11 +90,12 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="&lt;Stay Cool&gt; yurifromuk@gmail.com" />
         <option value="Stay Cool &lt;yuriformuk@gmail.com&gt;" />
+        <option value="stay cool &lt;yuriformuk@gmail.com&gt;" />
+        <option value="stay cool &lt;yurifromuk@gmail.com&gt;" />
+        <option value="&lt;Stay Cool&gt; yurifromuk@gmail.com" />
         <option value="S" />
         <option value="&lt;staycool&gt; yuriformuk@gmail.com" />
-        <option value="stay cool &lt;yuriformuk@gmail.com&gt;" />
         <option value="Stay Cool" />
         <option value="stay cool" />
         <option value="staycool" />
@@ -176,15 +143,15 @@
         <option value="$PROJECT_DIR$/service_windows.go" />
         <option value="$PROJECT_DIR$/service_unix.go" />
         <option value="$PROJECT_DIR$/blacklist_proxy.txt" />
-        <option value="$PROJECT_DIR$/blacklist_fresh.txt" />
         <option value="$PROJECT_DIR$/mbsSearch.go" />
         <option value="$PROJECT_DIR$/service.go" />
-        <option value="$PROJECT_DIR$/main.go" />
         <option value="$PROJECT_DIR$/configuration.go" />
         <option value="$PROJECT_DIR$/configuration_template.json" />
-        <option value="$PROJECT_DIR$/conf.json" />
-        <option value="$PROJECT_DIR$/logs_info.dat" />
         <option value="$PROJECT_DIR$/emailNotification.go" />
+        <option value="$PROJECT_DIR$/conf.json" />
+        <option value="$PROJECT_DIR$/main.go" />
+        <option value="$PROJECT_DIR$/blacklist_fresh.txt" />
+        <option value="$PROJECT_DIR$/logs_info.dat" />
         <option value="$PROJECT_DIR$/scan_logs.go" />
       </list>
     </option>
@@ -199,17 +166,33 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="974" />
-    <option name="y" value="36" />
+    <option name="x" value="924" />
+    <option name="y" value="338" />
     <option name="width" value="640" />
     <option name="height" value="520" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="Scope" currentSubView="Project Files" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <expand>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="windows_daemon" type="cbb8eebc:String" user="windows_daemon" />
+            </path>
+            <path>
+              <item name="Root" type="cbb8eebc:String" user="Root" />
+              <item name="windows_daemon" type="cbb8eebc:String" user="windows_daemon" />
+              <item name=".idea" type="cbb8eebc:String" user=".idea" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -221,31 +204,20 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <expand>
-            <path>
-              <item name="Root" type="cbb8eebc:String" user="Root" />
-              <item name="windows_daemon" type="cbb8eebc:String" user="windows_daemon" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="GO_FMT" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="term&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;termin&#9;ACTION&#9;ActivateTerminalToolWindow&#10;terminal&#9;ACTION&#9;ActivateTerminalToolWindow&#10;sett&#9;ACTION&#9;ShowSettings&#10;project settings&#9;ACTION&#9;ProjectViewPopupMenuSettingsGroup&#10;debug&#9;ACTION&#9;Debug&#10;replace&#9;ACTION&#9;Replace&#10;blacklist_hash&#9;FILE&#9;file://C:/Users/u.anikin/go/src/windows_daemon/blacklist_hash.dat&#10;termi&#9;ACTION&#9;ActivateTerminalToolWindow&#10;increase&#9;ACTION&#9;EditorIncreaseFontSize&#10;increase f&#9;ACTION&#9;EditorIncreaseFontSize&#10;font size&#9;ACTION&#9;EditorIncreaseFontSize&#10;font si&#9;ACTION&#9;EditorIncreaseFontSize&#10;keymap&#9;ACTION&#9;Help.KeymapReference" />
+    <property name="SearchEverywhereHistoryKey" value="terminal&#9;ACTION&#9;ActivateTerminalToolWindow&#10;ter&#9;ACTION&#9;ActivateTerminalToolWindow&#10;term&#9;ACTION&#9;ActivateTerminalToolWindow&#10;termin&#9;ACTION&#9;ActivateTerminalToolWindow&#10;sett&#9;ACTION&#9;ShowSettings&#10;project settings&#9;ACTION&#9;ProjectViewPopupMenuSettingsGroup&#10;debug&#9;ACTION&#9;Debug&#10;replace&#9;ACTION&#9;Replace&#10;blacklist_hash&#9;FILE&#9;file://C:/Users/u.anikin/go/src/windows_daemon/blacklist_hash.dat&#10;termi&#9;ACTION&#9;ActivateTerminalToolWindow&#10;increase&#9;ACTION&#9;EditorIncreaseFontSize&#10;increase f&#9;ACTION&#9;EditorIncreaseFontSize&#10;font size&#9;ACTION&#9;EditorIncreaseFontSize&#10;font si&#9;ACTION&#9;EditorIncreaseFontSize&#10;keymap&#9;ACTION&#9;Help.KeymapReference" />
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="false" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../EpochToGmt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.goide.configuration.GoProjectSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -387,7 +359,7 @@
       <configuration name="gobench windows_daemon" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
-  <component name="TodoView">
+  <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -398,28 +370,39 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77842563" visible="true" weight="0.2171875" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4989339" weight="0.3278867" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3109375" side_tool="true" weight="0.31707317" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.80544746" visible="true" weight="0.15572916" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4984375" weight="0.32731137" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.39322916" side_tool="true" visible="true" weight="0.45377257" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49947917" weight="0.32943678" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6966951" weight="0.27147403" />
-      <window_info id="Structure" order="1" sideWeight="0.22157435" side_tool="true" weight="0.19509594" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" visible="true" weight="0.31177095" />
-      <window_info id="Favorites" order="2" sideWeight="0.18396227" side_tool="true" weight="0.11666667" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.33722162" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49583334" weight="0.17747077" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6966951" weight="0.27138332" />
+      <window_info id="Structure" order="1" sideWeight="0.19455253" side_tool="true" visible="true" weight="0.15572916" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.6067708" visible="true" weight="0.45377257" />
+      <window_info id="Favorites" order="2" sideWeight="0.19273302" side_tool="true" weight="0.15572916" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.29798517" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8062954" visible="true" weight="0.15572916" />
+      <window_info id="Structure" order="1" sideWeight="0.1937046" side_tool="true" visible="true" weight="0.15572916" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4984375" weight="0.32731137" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49583334" weight="0.17747077" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6966951" weight="0.27138332" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32979852" />
       <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="4" side_tool="true" weight="0.3296875" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49946696" visible="true" weight="0.32900432" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.39270833" side_tool="true" visible="true" weight="0.5611052" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.29798517" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.60729164" visible="true" weight="0.5611052" />
+      <window_info id="Favorites" order="2" sideWeight="0.19273302" side_tool="true" weight="0.15572916" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -499,7 +482,10 @@
     <MESSAGE value="debug mode: working good, windows service fails. wtf?" />
     <MESSAGE value="Check if logs_info.dat have all correct existing files&#10;&#10;Service crashed because there was non-existing files listed in logs_info.dat." />
     <MESSAGE value="Stable commit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Stable commit." />
+    <MESSAGE value="Stable linux build. Scans log files, sends e-mail. Can't be run as daemon." />
+    <MESSAGE value="New blacklist mode &#10;&#10;&#10;no hash, just offset. No full scan through blacklist, only added." />
+    <MESSAGE value="New blacklist write/read and scan mode&#10;&#10;&#10;Removed writing/reading blacklist hash, now it's just offset in logs_dat. No full scan through blacklist, only added.&#10;Also now if new blacklist item added log will be scanned from beginning only for newly added blacklist items." />
+    <option name="LAST_COMMIT_MESSAGE" value="New blacklist write/read and scan mode&#10;&#10;&#10;Removed writing/reading blacklist hash, now it's just offset in logs_dat. No full scan through blacklist, only added.&#10;Also now if new blacklist item added log will be scanned from beginning only for newly added blacklist items." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -507,24 +493,68 @@
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://C:/Go/src/net/smtp/smtp.go</url>
           <line>319</line>
-          <properties />
           <option name="timeStamp" value="312" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/emailNotification.go</url>
           <line>47</line>
-          <properties />
           <option name="timeStamp" value="316" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/scan_logs.go</url>
+          <line>377</line>
+          <option name="timeStamp" value="320" />
+        </line-breakpoint>
+        <line-breakpoint type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/scan_logs.go</url>
+          <line>335</line>
+          <option name="timeStamp" value="327" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/scan_logs.go</url>
+          <line>375</line>
+          <option name="timeStamp" value="328" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/scan_logs.go</url>
+          <line>86</line>
+          <option name="timeStamp" value="332" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/scan_logs.go</url>
+          <line>159</line>
+          <option name="timeStamp" value="336" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/scan_logs.go</url>
+          <line>27</line>
+          <option name="timeStamp" value="339" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/scan_logs.go</url>
+          <line>61</line>
+          <option name="timeStamp" value="340" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/scan_logs.go</url>
+          <line>105</line>
+          <option name="timeStamp" value="342" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/scan_logs.go</url>
+          <line>204</line>
+          <option name="timeStamp" value="343" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="317" />
+      <option name="time" value="344" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="GoApplicationRunConfiguration">
-        <watch expression="ips" />
+        <watch expression="slices[6]" language="go" />
+        <watch expression="slices[8]" language="go" />
       </configuration>
     </watches-manager>
   </component>
@@ -583,6 +613,26 @@
     </expressions>
     <expressions id="watch">
       <expression>
+        <expression-string>slices[8]</expression-string>
+        <language-id>go</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>slices[6]</expression-string>
+        <language-id>go</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>slices[7]</expression-string>
+        <language-id>go</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>slices</expression-string>
+        <language-id>go</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>ips</expression-string>
         <language-id>go</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -612,30 +662,9 @@
         <language-id>go</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>words[0]</expression-string>
-        <language-id>go</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>logs_info</expression-string>
-        <language-id>go</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>urlsAndIps</expression-string>
-        <language-id>go</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>urlsandips</expression-string>
-        <language-id>go</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/service_windows.go" />
     <entry file="file://$PROJECT_DIR$/scan_logs.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3553">
@@ -677,13 +706,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-07-27-SMTP-(in).log" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/idea.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/idea.properties" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-07-31-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-07-30-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/blacklist.txt" />
@@ -718,13 +741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/blacklist_fresh.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="11" selection-start-column="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mbsSearch.go" />
     <entry file="file://$PROJECT_DIR$/manage.go" />
     <entry file="file://$PROJECT_DIR$/install.go" />
@@ -744,13 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Go/src/runtime/proc.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="151" selection-start-line="151" selection-end-line="151" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Go/src/runtime/panic.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="478">
@@ -758,29 +767,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Go/src/runtime/asm_amd64.s">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="572" selection-start-line="572" selection-end-line="572" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/calcMd5File.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-157" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/configuration_template.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logs_info.dat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -798,34 +788,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="29" selection-start-line="15" selection-start-column="4" selection-end-line="18" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../github.com/gomail-master/message.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="209" column="39" selection-start-line="209" selection-start-column="39" selection-end-line="209" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/emailNotification.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="47" column="49" selection-start-line="47" selection-start-column="49" selection-end-line="47" selection-end-column="49" />
-          <folding>
-            <element signature="e#14#74#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -836,10 +802,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/Go/src/runtime/proc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="197" selection-start-line="197" selection-end-line="197" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Go/src/runtime/asm_amd64.s">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="2360" selection-start-line="2360" selection-end-line="2360" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/emailNotification.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="855">
+          <caret line="53" column="55" lean-forward="true" selection-start-line="53" selection-start-column="55" selection-end-line="53" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/calcMd5File.go" />
+    <entry file="file://$PROJECT_DIR$/blacklist_fresh.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conf.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="67" selection-start-line="20" selection-start-column="67" selection-end-line="20" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="38" column="24" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#2500#2506#0" expanded="true" />
+            <element signature="e#2507#2513#0" expanded="true" />
+            <element signature="e#2967#2973#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs_info.dat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scan_logs.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="386" column="1" lean-forward="true" selection-start-line="386" selection-start-column="1" selection-end-line="386" selection-end-column="1" />
+        <state relative-caret-position="93">
+          <caret line="321" column="32" lean-forward="true" selection-start-line="321" selection-start-column="32" selection-end-line="321" selection-end-column="32" />
         </state>
       </provider>
     </entry>

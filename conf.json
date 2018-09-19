@@ -19,5 +19,5 @@
 	},
 	"blacklistPath": "C:\\Users\\u.anikin\\go\\src\\windows_daemon\\blacklist_proxy.txt",
 	"logFilesPath": "C:\\Users\\u.anikin\\go\\src\\windows_daemon",
-	"interval": "15"
+	"interval": "30"
 }
