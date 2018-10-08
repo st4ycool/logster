@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08f1f7a7-61ee-4e0c-a6ff-62998c4fd982" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="08f1f7a7-61ee-4e0c-a6ff-62998c4fd982" name="Default" comment="New blacklist write/read and scan mode&#10;&#10;&#10;Removed writing/reading blacklist hash, now it's just offset in logs_dat. No full scan through blacklist, only added.&#10;Also now if new blacklist item added log will be scanned from beginning only for newly added blacklist items.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/debug.exe" beforeDir="false" afterPath="$PROJECT_DIR$/debug.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scan_logs.go" beforeDir="false" afterPath="$PROJECT_DIR$/scan_logs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service_windows.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,17 +21,8 @@
       <file leaf-file-name="scan_logs.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scan_logs.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="379" selection-start-line="379" selection-end-line="379" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="service_windows.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/service_windows.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="17" />
+            <state relative-caret-position="302">
+              <caret line="379" column="28" selection-start-line="379" selection-start-column="28" selection-end-line="379" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -40,7 +30,7 @@
       <file leaf-file-name="logs_info.dat" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/logs_info.dat">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
+            <state relative-caret-position="51">
               <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
             </state>
           </provider>
@@ -113,7 +103,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="proxyLinux" />
+        <entry key="$PROJECT_DIR$" value="linux_build" />
       </map>
     </option>
     <option name="WARN_ABOUT_CRLF" value="false" />
@@ -371,18 +361,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.806962" visible="true" weight="0.209375" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.77574754" visible="true" weight="0.209375" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4989339" weight="0.3278867" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.309375" side_tool="true" visible="true" weight="0.32979852" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3109375" side_tool="true" weight="0.31707317" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.690625" visible="true" weight="0.32979852" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24548353" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6966951" visible="true" weight="0.36025506" />
       <window_info id="Structure" order="1" sideWeight="0.22157435" side_tool="true" weight="0.19509594" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" weight="0.1845175" />
-      <window_info id="Favorites" order="2" sideWeight="0.19303797" side_tool="true" visible="true" weight="0.209375" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" weight="0.18384697" />
+      <window_info id="Favorites" order="2" sideWeight="0.22425249" side_tool="true" visible="true" weight="0.209375" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.33722162" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -408,22 +397,22 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.77842563" visible="true" weight="0.209375" />
       <window_info id="Structure" order="1" sideWeight="0.22157435" side_tool="true" weight="0.19509594" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4989339" weight="0.3278867" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6966951" visible="true" weight="0.53340405" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32979852" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6890625" weight="0.33722162" />
       <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="4" side_tool="true" weight="0.3296875" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.48560768" weight="0.1845175" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3109375" side_tool="true" weight="0.31707317" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49626866" weight="0.24618736" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32979852" />
       <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49946696" visible="true" weight="0.32900432" />
       <window_info id="Favorites" order="2" sideWeight="0.18396227" side_tool="true" weight="0.11666667" />
     </layout-to-restore>
@@ -495,12 +484,12 @@
         </line-breakpoint>
         <line-breakpoint type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/scan_logs.go</url>
-          <line>88</line>
+          <line>102</line>
           <option name="timeStamp" value="290" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/scan_logs.go</url>
-          <line>331</line>
+          <line>325</line>
           <option name="timeStamp" value="297" />
         </line-breakpoint>
       </breakpoints>
@@ -638,13 +627,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service_windows.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/service_windows.go" />
     <entry file="file://$PROJECT_DIR$/scan_logs.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3553">
@@ -666,13 +649,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service_windows.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/service_windows.go" />
     <entry file="file://$PROJECT_DIR$/scan_logs.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3553">
@@ -694,13 +671,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/service_windows.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="69" column="19" selection-start-line="69" selection-start-column="19" selection-end-line="69" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/service_windows.go" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-06-18-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-06-17-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-06-16-SMTP-(in).log" />
@@ -753,13 +724,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-07-27-SMTP-(in).log" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/idea.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/idea.properties" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-07-31-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/MDaemon-2018-07-30-SMTP-(in).log" />
     <entry file="file://$PROJECT_DIR$/blacklist.txt" />
@@ -800,8 +765,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="63" column="13" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+        <state relative-caret-position="957">
+          <caret line="64" column="9" lean-forward="true" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -862,31 +827,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/logs_info.dat">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service_windows.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/service_unix.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="7" selection-start-column="7" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/service_windows.go" />
+    <entry file="file://$PROJECT_DIR$/service_unix.go" />
     <entry file="file://$PROJECT_DIR$/scan_logs.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="379" selection-start-line="379" selection-end-line="379" />
+        <state relative-caret-position="302">
+          <caret line="379" column="28" selection-start-line="379" selection-start-column="28" selection-end-line="379" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logs_info.dat">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
         </state>
       </provider>
     </entry>
