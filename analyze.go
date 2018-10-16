@@ -135,7 +135,7 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 
 	lines := 0
 	var sheet string
-	sheet = fmt.Sprintf("\n\n\n Log analyzer REPORT for file: %s \r\nFound %d suspicious events!: ", log_name, found)
+	sheet = fmt.Sprintf("\n\n\nLog analyzer REPORT for file: %s \r\nFound %d suspicious events!: ", log_name, found)
 	for url, count := range banned_report {
 		sheet += fmt.Sprintf("%d times: %s; ", count, url)
 		lines++
