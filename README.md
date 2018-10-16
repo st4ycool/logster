@@ -9,33 +9,33 @@ You simply add these c&c ip addresses to blacklist, run logster and it will chec
 if somebody was requesting something from that ip.
 
 ***BEFORE START:***
-1. Create "conf.json" containing:
-`{
-	"from": {
-		"name": "**your name**",
-		"email": "**your e-mail**"
-	},
-	"to": {
-		"name": "**name of recepient 1**",
-		"email": "**e-mail of recepient 1**"
-	},
-	"to": {
-		"name": "**name of recepient 2**",
-		"email": "**e-mail of recepient 2**"
-	},
-	"server": "**your mail server host**",
-	"port": "**port**",
-	"auth": {
-		"login": "**your login**",
-		"password": "**your password**"
-	},
-	"blacklistPath": "**path to file that contains blocked urls or domains or just words: 1 url per line, each line ends with CR LF**",
-	"logFilesPath": "**path to folder where .log files stored**",
-	"interval": "**log files scanning interval**"
-}`
-2. Put conf.json file in project folder or near executive.
+1. Create "conf.json" containing:  
+{  
+	"from": {  
+		"name": "**your name**",  
+		"email": "**your e-mail**"  
+	},  
+	"to": {  
+		"name": "**name of recepient 1**",  
+		"email": "**e-mail of recepient 1**"  
+	},  
+	"to": {  
+		"name": "**name of recepient 2**",  
+		"email": "**e-mail of recepient 2**"  
+	},  
+	"server": "**your mail server host**",  
+	"port": "**port**",  
+	"auth": {  
+		"login": "**your login**",  
+		"password": "**your password**"  
+	},  
+	"blacklistPath": "**path to file that contains blocked urls or domains or just words: 1 url per line, each line ends with CR LF**",  
+	"logFilesPath": "**path to folder where .log files stored**",  
+	"interval": "**log files scanning interval**"  
+}  
+2. Put conf.json file in project folder or near executive.  
 
-***USAGE:*** you can build and run this branch in windows and linux both.
+***USAGE:*** you can build and run this branch in windows and linux both. 
 Also you can run logster as systemd unit and it will work as often as you set it to in conf.json file (edit "interval" field)
 
 
