@@ -84,6 +84,7 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 		}
 
 		for _, found_match := range urlsAndIps { //compare found urls and ips from log file_bs with every url and ip from blacklist.
+
 			for _, banned := range banned_urls {
 				if banned != "" {
 					if strings.Contains(found_match, banned) {
@@ -95,9 +96,12 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 						}
 
 						slices := strings.Fields(log_entry)
-						aaa := strings.Split(slices[0], ".")
-						times, err := strconv.ParseInt(aaa[0], 10, 64)
-						check(err)
+						var times int64
+						if !strings.Contains(slices[0], "-") {
+							aaa := strings.Split(slices[0], ".")
+							times, err = strconv.ParseInt(aaa[0], 10, 64)
+							check(err)
+						}
 						slices[0] = time.Unix(times, 0).String() // Epoch time to normal time
 
 						log_entry = ""

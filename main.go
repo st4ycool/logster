@@ -17,7 +17,7 @@ import (
 
 func main() {
 
-	jsonfile := "./conf.json"
+	jsonfile := "conf.json"
 
 	if _, err := os.Stat(jsonfile); err != nil {
 		log.Fatalf("Unable to find configuration file\nPlease, generate config using <generate> command\n ")
@@ -37,6 +37,7 @@ func main() {
 	interval, err := strconv.ParseInt(c.ScanningInterval, 0, 0) //string to int
 	if err != nil {
 		log.Println(err)
+		println("4")
 		return
 	}
 

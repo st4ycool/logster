@@ -52,8 +52,10 @@ func scan_logs() {
 	//Read logs_info.dat file that contains name and offset for each file, and for extra one for blacklist
 	dat_f := "./logs_info.dat"
 	if _, err := os.Stat(dat_f); err != nil {
-		log.Fatalf("Unable to find logs info file\n")
+		print("Unable to find logs info file\n")
+		os.Create("logs_info.dat")
 	}
+
 	dat_file, err := os.Open(dat_f)
 
 	defer dat_file.Close()
@@ -108,10 +110,10 @@ func scan_logs() {
 	}
 
 
-
 	//Find all .log files in path set in conf.json
 	log_file_names := make([]string, 0)
 
+	//todo: check if filepath is valid, before calling filepath.Walk. Different check for linux and win branch pls )
 	err = filepath.Walk(logFilesPath+"/", func(path string, info os.FileInfo, err error) error {	//recursive walk through directory
 		if info.IsDir() && (info.Name() != filepath.Base(logFilesPath)) { //skip all directories excluding root directory
 			return filepath.SkipDir
@@ -211,14 +213,8 @@ func scan_logs() {
 				fmt.Printf(fmt.Sprintf("\ndecided what to do with file %s. Scan from %d to %d.\n", log_name, offset, new_log_file_size))
 		}
 
-
-
-
 		//Analyze current log file
 		report, found, err := analyze(logFilesPath + "/" + log_name, offset, banned_urls)
-
-
-
 
 		//if file exist and scan completed
 		if err == nil {
@@ -227,6 +223,15 @@ func scan_logs() {
 
 			//if something found: report it via e-mail
 			if found > 0 {
+				filename := "./report_for_" + log_name +  							//build report name. for %file% scan from %start_byte% to %end_byte% and save to ~/
+							"_scan_from_" + fmt.Sprintf("%s", offset) +
+							"_to_" + fmt.Sprintf("%s", new_log_file_size) + "_bytes"
+
+				err = ioutil.WriteFile( filename, []byte(report), 0466)
+				check(err)
+
+				println(fmt.Sprintf("### report size = %d", len(report)))
+
 				alertMail(fmt.Sprintf("Alert-report for file %s! %d suspicious events!", log_name, found), report)
 			}
 		} else if os.IsNotExist(err) {	 //if file not found
