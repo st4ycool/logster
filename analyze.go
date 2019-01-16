@@ -6,7 +6,6 @@ import (
 	"bufio"
 	"fmt"
 	"strings"
-	"strconv"
 	"time"
 )
 
@@ -25,8 +24,8 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 	ip_addr, err := regexp.Compile(`(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})`) //regex for ip addresses
 	check(err)
 
-	//section_mark, err := regexp.Compile(`----------`) //regex for section mark in mdaemon log files.
-	//check(err)
+	section_mark, err := regexp.Compile(`----------`) //regex for section mark in mdaemon log files.
+	check(err)
 
 	scanner := bufio.NewScanner(log_file)
 	var banned_report = make(map[string]int)
@@ -57,11 +56,11 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 
 		log_entry = scanner.Text()
 
-		//sectionMarkFound := section_mark.MatchString(scanner.Text())
-		//for sectionMarkFound == false { // continue scan and copy until section mark
-		//sectionMarkFound = section_mark.MatchString(scanner.Text())
-		//	log_entry += "\n" + scanner.Text() //log entry means 1 section of log/1 event
-		//	if !scanner.Scan() {break} //break cycle if there are nothing more to scan
+		sectionMarkFound := section_mark.MatchString(scanner.Text())
+		for sectionMarkFound == false { // continue scan and copy until section mark
+		sectionMarkFound = section_mark.MatchString(scanner.Text())
+			log_entry += "\n" + scanner.Text() //log entry means 1 section of log/1 event
+			if !scanner.Scan() {break} //break cycle if there are nothing more to scan
 
 		progress++
 		if progress%1000 == 0 {
@@ -69,11 +68,11 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 			fmt.Printf("\r......Scanned: %d lines of log. Size: %d / %d MB......", progress, off/1000000, new_log_file_size/1000000)
 
 		}
-		//} todo:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		} //todo:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-		//if sectionMarkFound == true {
-		//	//okay, we copied 1 full log entry. Let's find urls and ips in it and compare to blacklist
-		//sectionMarkFound = false
+		if sectionMarkFound == true {
+			//okay, we copied 1 full log entry. Let's find urls and ips in it and compare to blacklist
+		sectionMarkFound = false
 		urlsAndIps := make([]string, 0)
 		for _, strings_found := range ip_addr.FindAllString(log_entry, -1) { //search for ip's in log entry
 			urlsAndIps = append(urlsAndIps, strings_found)
@@ -94,19 +93,19 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 							banned_report[banned] = 1
 						}
 
-						slices := strings.Fields(log_entry)
-						aaa := strings.Split(slices[0], ".")
-						times, err := strconv.ParseInt(aaa[0], 10, 64)
-						check(err)
-						slices[0] = time.Unix(times, 0).String() // Epoch time to normal time
-
-						log_entry = ""
-
-						for i := range slices { // change all http:// and dots to similar looking ascii symbols
-							slices[i] = strings.Replace(slices[i], ".", "ˌ", -1)             // to exclude missclicks on dangerous links, etc, when receiving
-							slices[i] = strings.Replace(slices[i], "http://", "hțțp://", -1) // log analyze report via e-mail. URL won't be clickable
-							log_entry += slices[i] + " "
-						}
+						//slices := strings.Fields(log_entry)
+						//aaa := strings.Split(slices[0], ".")
+						//times, err := strconv.ParseInt(aaa[0], 10, 64)
+						//check(err)
+						//slices[0] = time.Unix(times, 0).String() // Epoch time to normal time
+						//
+						//log_entry = ""
+						//
+						//for i := range slices { // change all http:// and dots to similar looking ascii symbols
+						//	slices[i] = strings.Replace(slices[i], ".", "ˌ", -1)             // to exclude missclicks on dangerous links, etc, when receiving
+						//	slices[i] = strings.Replace(slices[i], "http://", "hțțp://", -1) // log analyze report via e-mail. URL won't be clickable
+						//	log_entry += slices[i] + " "
+						//}
 
 						report += "\n\n\n..........\nFound banned \"" + banned + "\" in section: \n" + log_entry
 
@@ -124,7 +123,7 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 			}
 		}
 	}
-	//} todo:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	} //todo:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	if ips != nil {
 		for _, ipd := range ips {

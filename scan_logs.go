@@ -58,7 +58,10 @@ func scan_logs()  {
 	dat_f := "./logs_info.dat"
 
 	if _, err := os.Stat(dat_f); err != nil {
-		log.Fatalf("Unable to find logs info file\n")
+		//log.Fatalf("Unable to find logs info file\n")
+		f, err := os.Create(dat_f)
+		check(err)
+		defer f.Close()
 	}
 
 	dat_file, err := os.Open(dat_f)
