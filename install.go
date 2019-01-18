@@ -56,7 +56,7 @@ func installService(name, desc string) error {
 		s.Close()
 		return fmt.Errorf("service %s already exists", name)
 	}
-	s, err = m.CreateService(name, exepath, mgr.Config{DisplayName: desc, Description: "Service analyzes MDaemon log and sends reports via e-mail in case of alert. Created by IT/IS department Morskoy Bank", StartType: mgr.StartAutomatic}, "is", "auto-started")
+	s, err = m.CreateService(name, exepath, mgr.Config{DisplayName: desc, Description: "Service analyzes MDaemon log and sends reports via e-mail in case of alert.", StartType: mgr.StartAutomatic}, "is", "auto-started")
 	if err != nil {
 		return err
 	}

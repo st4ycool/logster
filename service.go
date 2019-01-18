@@ -10,19 +10,16 @@ import (
 	"fmt"
 	"strings"
 	"time"
-
 	"golang.org/x/sys/windows/svc"
 	"golang.org/x/sys/windows/svc/debug"
 	"golang.org/x/sys/windows/svc/eventlog"
 	"os"
-	"path/filepath"
 	"log"
 	"io/ioutil"
 	"encoding/json"
 	"strconv"
+	"path/filepath"
 )
-
-const PATH_SEPARATOR = "\\"
 
 var elog debug.Log
 
@@ -32,21 +29,19 @@ func (m *myservice) Execute(args []string, r <-chan svc.ChangeRequest, changes c
 	const cmdsAccepted = svc.AcceptStop | svc.AcceptShutdown | svc.AcceptPauseAndContinue
 	changes <- svc.Status{State: svc.StartPending}
 
-		ex, err := os.Executable()
-		if err != nil {
-			panic(err)
-		}
-		jsonfile := filepath.Dir(ex) + PATH_SEPARATOR + "conf.json"
-		if err != nil {
-			panic(err)
-	}
+		elog.Info(100, filepath.Dir(os.Args[0]))
+
+	jsonfile := filepath.Dir(os.Args[0]) + "\\conf.json"
 
 	if _, err := os.Stat(jsonfile); err != nil {
+		println("\n")
+		elog.Info(500, err.Error())
 		log.Fatalf("Unable to find configuration file\nPlease, generate config using <generate> command\n ")
 		return
 	}
 	data, err := ioutil.ReadFile(jsonfile)
 	if err != nil {
+		elog.Info(500, fmt.Sprintf("Fatal! %s", err.Error()))
 		log.Fatalln(err)
 	}
 	c := &Config{}
@@ -62,9 +57,7 @@ func (m *myservice) Execute(args []string, r <-chan svc.ChangeRequest, changes c
 		return
 	}
 
-	fasttick := time.Tick(time.Duration(interval) * time.Second)
-	slowtick := time.Tick(time.Duration(interval) * 3 * time.Second)
-	tick := fasttick
+	tick := time.Tick(time.Duration(interval) * time.Second)
 	changes <- svc.Status{State: svc.Running, Accepts: cmdsAccepted}
 	fmt.Printf(strings.Join(args, "-"))
 loop:
@@ -72,7 +65,7 @@ loop:
 		scan_logs()
 		select {
 		case <-tick:
-			fmt.Println("Tick! New log analyze iteration start")
+			fmt.Println("\n\nTick! New log analyze iteration start")
 					case c := <-r:
 			switch c.Cmd {
 			case svc.Interrogate:
@@ -82,13 +75,8 @@ loop:
 				changes <- c.CurrentStatus
 			case svc.Stop, svc.Shutdown:
 				break loop
-			case svc.Pause:
-				changes <- svc.Status{State: svc.Paused, Accepts: cmdsAccepted}
-				tick = slowtick
-			case svc.Continue:
-				changes <- svc.Status{State: svc.Running, Accepts: cmdsAccepted}
-				tick = fasttick
 			default:
+				println("\n")
 				elog.Error(1, fmt.Sprintf("unexpected control request #%d", c))
 			}
 		}
@@ -109,6 +97,7 @@ func runService(name string, isDebug bool) {
 	}
 	defer elog.Close()
 
+	println("\n")
 	fmt.Println(fmt.Sprintf("Starting %s service ", name))
 	run := svc.Run
 	if isDebug {
@@ -116,8 +105,12 @@ func runService(name string, isDebug bool) {
 	}
 	err = run(name, &myservice{})
 	if err != nil {
+		println("\n")
 		elog.Error(200, fmt.Sprintf("%s service failed: %v", name, err))
 		return
 	}
+
+	println("\n")
 	elog.Info(1, fmt.Sprintf("%s service stopped", name))
+
 }

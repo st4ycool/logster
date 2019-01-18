@@ -13,9 +13,8 @@ import (
 	"log"
 	"strings"
 	"io"
-)
 
-var debugging=true
+)
 
 func usage(errmsg string) {
 	fmt.Fprintf(os.Stderr,
@@ -23,16 +22,13 @@ func usage(errmsg string) {
 			"usage: %s <command>\n"+
 			"where <command> is one from:\n\n"+
 			"generate 			[generate config file]\n"+
-			"install conf <path>\t\t[install mdaemon log analyzer with..\n" +
-			"					..already existing config]\n" +
+			"install            \t\t[install mdaemon log analyzer with generated..\n" +
+			"					..or existing conf.json in root folder]\n" +
 			"remove				[remove service]\n"+
 			"debug				[run service without installing to..\n"+
 			"					..windows service manager]\n" +
 			"start				[start service]\n"+
-			"stop				[stop service]\n"+
-			"pause				[set service scan logs by x3 times..\n" +
-			"					..slower than interval]\n" +
-			"continue			[set service to scan logs by interval\n",
+			"stop				[stop service]\n",
 		errmsg, os.Args[0])
 	os.Exit(2)
 }
@@ -44,6 +40,7 @@ func main() {
 
 	isIntSess, err := svc.IsAnInteractiveSession()
 	if err != nil {
+		elog.Info(500, fmt.Sprintf("Fatal! Failed to determine if we are running in an interactive session: %s", err.Error()))
 		log.Fatalf("failed to determine if we are running in an interactive session: %v", err)
 	}
 	if !isIntSess {
@@ -78,16 +75,11 @@ func main() {
 	case "stop":
 		fmt.Fprint(writer, "Stopping service\n")
 		err = controlService(svcName, svc.Stop, svc.Stopped)
-	case "pause":
-		fmt.Fprint(writer, "Scaning logs will be slowed x3 times \n")
-		err = controlService(svcName, svc.Pause, svc.Paused)
-	case "continue":
-		fmt.Fprint(writer, "Scanning logs by interval from conf.json\n")
-		err = controlService(svcName, svc.Continue, svc.Running)
 	default:
 		usage(fmt.Sprintf("invalid command %s", cmd))
 	}
 	if err != nil {
+		elog.Info(500, fmt.Sprintf("Fatal! Failed to %s %s: %s", cmd, svcName, err.Error()))
 		log.Fatalf("failed to %s %s: %v", cmd, svcName, err)
 	}
 	return

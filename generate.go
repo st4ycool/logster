@@ -12,14 +12,7 @@ import (
 
 func generate () {
 
-	ex, err := os.Executable()
-	if err != nil {
-		panic(err)
-	}
-	jsonfile := filepath.Dir(ex) +  "\\conf.json"
-	if err != nil {
-		panic(err)
-	}
+	jsonfile := filepath.Dir(os.Args[0]) +  "\\conf.json"
 
 	reader := bufio.NewReader(os.Stdin)
 	if fStat, err := os.Stat(jsonfile); err == nil && !fStat.IsDir() {
@@ -52,7 +45,7 @@ func generate () {
 		Port:             ask("Port:\t\t\t\t"),
 		ScanningInterval: ask("Scan interval:\t\t\t"),
 		BlacklistPath:    ask("Path to blacklist file:\t"),
-		LogFilesPath:     ask("Root folder with log files:\t"),
+		LogFilesPath:     ask("Path to folder with log files:\t"),
 	}
 	j, err := json.MarshalIndent(c, "", "\t")
 	if err != nil {

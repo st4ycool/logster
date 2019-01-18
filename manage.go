@@ -12,9 +12,11 @@ import (
 
 	"golang.org/x/sys/windows/svc"
 	"golang.org/x/sys/windows/svc/mgr"
+
 )
 
 func startService(name string) error {
+
 	m, err := mgr.Connect()
 	if err != nil {
 		return err
@@ -26,6 +28,7 @@ func startService(name string) error {
 	}
 	defer s.Close()
 	err = s.Start("is", "manual-started")
+
 	if err != nil {
 		return fmt.Errorf("could not start service: %v", err)
 	}

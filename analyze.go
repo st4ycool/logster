@@ -9,11 +9,11 @@ import (
 	"time"
 )
 
-func analyze(log_name string, offset int64, banned_urls []string) (string, int, error) {
+func analyze(log_name string, offset int64, banned_urls []string, all_banned_urls_found map[string]int) (string, map[string]int, error) {
 
 	log_file, err := os.Open(log_name)
 	if err != nil {
-		return "", 0, err //means that entry from logs_info will be removed if that file doesn't exist
+		return "", nil, err //means that entry from logs_info will be removed if that file doesn't exist
 	}
 	defer log_file.Close()
 
@@ -82,7 +82,8 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 			urlsAndIps = append(urlsAndIps, strings_found)
 		}
 
-		for _, found_match := range urlsAndIps { //compare found urls and ips from log file_bs with every url and ip from blacklist.
+			for _, found_match := range urlsAndIps { //compare found urls and ips from log file_bs with every url and ip from blacklist.
+
 			for _, banned := range banned_urls {
 				if banned != "" {
 					if strings.Contains(found_match, banned) {
@@ -93,23 +94,15 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 							banned_report[banned] = 1
 						}
 
-						//slices := strings.Fields(log_entry)
-						//aaa := strings.Split(slices[0], ".")
-						//times, err := strconv.ParseInt(aaa[0], 10, 64)
-						//check(err)
-						//slices[0] = time.Unix(times, 0).String() // Epoch time to normal time
 						//
-						//log_entry = ""
-						//
-						//for i := range slices { // change all http:// and dots to similar looking ascii symbols
-						//	slices[i] = strings.Replace(slices[i], ".", "ˌ", -1)             // to exclude missclicks on dangerous links, etc, when receiving
-						//	slices[i] = strings.Replace(slices[i], "http://", "hțțp://", -1) // log analyze report via e-mail. URL won't be clickable
-						//	log_entry += slices[i] + " "
-						//}
+						//// change all http:// and dots to similar looking ascii symbols
+						//log_entry = strings.Replace(log_entry, ".", "ˌ", -1)             // to exclude missclicks on dangerous links, etc, when receiving
+						//log_entry = strings.Replace(log_entry, "http://", "hțțp://", -1) // log analyze report via e-mail. URL won't be clickable
+
 
 						report += "\n\n\n..........\nFound banned \"" + banned + "\" in section: \n" + log_entry
 
-						var flag bool = false
+						var flag = false
 						for _, ip := range ips {
 							if ip == banned {
 								flag = true
@@ -143,9 +136,21 @@ func analyze(log_name string, offset int64, banned_urls []string) (string, int, 
 		}
 	}
 
+	for url, count := range banned_report {
+		if _, ok := all_banned_urls_found[url]; ok { //check if i already found that banned url, count them for summary in report.
+			all_banned_urls_found[url]+= count
+		} else {
+			all_banned_urls_found[url] = count
+		}
+	}
+
 	a := time.Now().String() // why time appears with some trash in the tail?
 	clearTime := a[:len(a)-29]
 	sheet += fmt.Sprintf("\nTIME: %s", clearTime) + report
 
-	return sheet, found, err
+	if found > 0 {
+		return sheet, all_banned_urls_found, err
+	} else {
+		return "", all_banned_urls_found, err
+	}
 }

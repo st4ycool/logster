@@ -1,8 +1,8 @@
 //this file contains two functions: scan_logs() and analyze()
 //scan_logs is detecting log files in current directory, reads logs_info file to determine which log file was scanned to what offset,
-//then it decides either to scan or not to scan file, and calls analyze()
+//after it decides either to scan or not to scan file, and calls analyze()
 
-//analyze() is opening file, compiles regex, uses regex, finds events in log file entries, if found - creates report and e-mails with sendMail(), end.
+//analyze() applies regex to log entries to find something from blacklist. If found - creates report and e-mails with sendMail()
 
 package main
 
@@ -16,52 +16,50 @@ import (
 	"path/filepath"
 	"log"
 	"encoding/json"
+	"time"
 )
 
-func scan_logs()  {
-
-	//ex, err := os.Executable()
-	//check(err)
-	//dir := filepath.Dir(ex)
-	//fmt.Printf("\nworking in directory: " + dir + "\n")
+func scan_logs() {
 
 	var (
 		log_name          string
 		offset            int64
 	)
 
-	jsonfile := "./conf.json"
-
+	//Read configuration file (e-mail credentials, scanning interval, paths to log_files, etc)
+	jsonfile := filepath.Dir(os.Args[0]) + "\\conf.json"
 	if _, err := os.Stat(jsonfile); err != nil {
-		log.Fatalf("Unable to find configuration file [%s].\n", jsonfile)
-		log.Fatalf("Error: %s", err.Error())
+		elog.Info(500, err.Error())
+		log.Fatalf("\nUnable to find configuration file [%s].", jsonfile)
 		return
 	}
+
 	data, err := ioutil.ReadFile(jsonfile)
+
 	if err != nil {
+		elog.Info(2, err.Error())
 		log.Fatalln(err)
 	}
+
 	c := &Config{}
+
 	err = json.Unmarshal(data, c)
 	if err != nil {
 		println(err)
 		return
 	}
+
 	var (
 		blacklistPath = c.BlacklistPath
 		logFilesPath  = c.LogFilesPath
 	)
 
-	//Read logs_info.dat
-	//fmt.Printf("read logs_info\n")
-
-	dat_f := "./logs_info.dat"
+	//Read logs_info.dat file that contains name and offset for each file, and for extra one for blacklist
+	dat_f := filepath.Dir(os.Args[0]) + "\\logs_info.dat"
 
 	if _, err := os.Stat(dat_f); err != nil {
-		//log.Fatalf("Unable to find logs info file\n")
-		f, err := os.Create(dat_f)
-		check(err)
-		defer f.Close()
+		fmt.Printf("\nUnable to find logs info file")
+		os.Create(dat_f)
 	}
 
 	dat_file, err := os.Open(dat_f)
@@ -85,17 +83,20 @@ func scan_logs()  {
 	logs_info := make([]string, 0)
 	for logs_info_scanner.Scan() {
 		if logs_info_scanner.Text() != "" {
-			logs_info = append(logs_info, logs_info_scanner.Text()) //logs_info file contains name of log file, offset (byte where analyze ended last time), file size: [name, offset, size]
-		} //collect all info into logs_info string
+			logs_info = append(logs_info, logs_info_scanner.Text())
+		}
 	}
 
-	//scan blacklist
+	//Scan blacklist file (blacklist file should contain one forbidden url/domain [according to regex] in each line of file)
 	var blacklist_size int64
 	fi, err := os.Stat(blacklistPath)
 	if err == nil {
 		// get the size
 		blacklist_size = fi.Size()
 		check(err)
+	} else {
+		elog.Info(500, fmt.Sprintf("Can't open %s! Error: %v", blacklistPath, err))
+		log.Fatalf("can't open blacklist file! %v", err)
 	}
 
 	file_blacklist, _ := os.Open(blacklistPath)
@@ -103,106 +104,104 @@ func scan_logs()  {
 	scanner_blacklist := bufio.NewScanner(file_blacklist)
 	use_only_new_blacklist_items := false
 
-	//decide to scan logs with recently added blacklist items OR continue scanning upcoming log lines for whole blacklist items
-	if blacklist_size > blacklist_offset {
-		fmt.Printf("\nBlacklist has grown.\n")
+	//Decide to scan logs with recently added blacklist urls OR continue scanning upcoming log lines for each blacklist url
+	if blacklist_size > blacklist_offset {	//if blacklist size changed == something added, so scan log from beginning only for recently added urls
+		fmt.Printf("\nBlacklist has grown.")
 		file_blacklist.Seek(blacklist_offset, 0)
 		use_only_new_blacklist_items = true
 	}
 
-	//fmt.Printf("read blacklist\n")
-
 	banned_urls := make([]string, 0) //store all blacklist items (urls or ips, or domain names)
 	for scanner_blacklist.Scan() {
 		if scanner_blacklist.Text() != "" {
-			banned_urls = append(banned_urls, scanner_blacklist.Text()) //collect all banned urls and ip addresses in one array
+			banned_urls = append(banned_urls, scanner_blacklist.Text())
 		}
 	}
 
-	//Find all .log files in folder from conf.json
-	file_names := make([]string, 0)
 
-	err = filepath.Walk(logFilesPath+"/", func(path string, info os.FileInfo, err error) error {
+	//Find all .log files in path set in conf.json
+	log_file_names := make([]string, 0)
+
+	//todo: check if filepath is valid, before calling filepath.Walk. Different check for linux and win branch pls )
+	err = filepath.Walk(logFilesPath+"/", func(path string, info os.FileInfo, err error) error {	//recursive walk through directory
 		if info.IsDir() && (info.Name() != filepath.Base(logFilesPath)) { //skip all directories excluding root directory
 			return filepath.SkipDir
 		}
 		if filepath.Ext(path) == ".log" {
-			file_names = append(file_names, filepath.Base(path)) //collect all .log file names from current directory
+			log_file_names = append(log_file_names, filepath.Base(path)) //collect all .log file names from current directory
 		}
 		return nil
 	})
 	check(err)
 
-	//fmt.Printf("find log files\n")
-	var names string
-	if len(file_names) > 0 {
-		for w := range file_names {
-			names += file_names[w] + "\n"
-		}
-	} else {
-		//remove logs_info because there no log files in directory
+
+	//If there is no .log file: remove logs_info.dat
+	if len(log_file_names) < 1 {
 		dat_file.Close()
-		err = os.Remove("./logs_info.dat")
+		err = os.Remove(filepath.Dir(os.Args[0]) + "\\logs_info.dat")
 		check(err)
-		fmt.Printf(fmt.Sprintf("...buuut no log files found in %s%s", logFilesPath, "/"))
+		fmt.Printf(fmt.Sprintf("\n...buuut no log files found in %s%s", logFilesPath, "/"))
 		return
 	}
+
 	dat := 	"###########################################" + //"dat" is new logs_info.dat file, that will be written in the end
 			"\nblacklist offset:\n" +
 	   		 fmt.Sprintf("%d", blacklist_size) + "\n" +
 			"###########################################" +
 			"\nlog files offset:"
 
-	//fmt.Printf("compare files to logs info\n")
-
-	//compare actual log names from working directory to logs_info. If logs_info have non-existing file in directory: delete it. If it's some file in directory,
+	//Look if there are record in logs_info for found files If logs_info have non-existing file in directory: delete it. If it's some file in directory,
 	//not included in logs info - add it, with 0 offset.
 
 	if len(logs_info) > 0 {
-		for f := range file_names {
+		for f := range log_file_names {	//ain't range for slices return 2 index and value? Can't understand how this works
 			var recordFound bool
 			for x := range logs_info {
-				recordFound = strings.Contains(logs_info[x], file_names[f]) // check if there is record in logs_info.dat of a file from directory
+				recordFound = strings.Contains(logs_info[x], log_file_names[f]) // check if there is record in logs_info.dat of a file from directory
 				if recordFound == true {
-					break
+					break		//if matches means file exist, so break (go to next record)
 				}
 			}
-			if recordFound == false {
-				logs_info = append(logs_info, file_names[f]+" 0") //for new files write: filename 0(offset)
+			if recordFound == false {	//if not matches means there are no record in logs_info, but file exist. So, add record it into logs_info
+				logs_info = append(logs_info, log_file_names[f]+" 0") //new files comes with 0 offset, what means they wasnt scanned before
 			}
 		}
-	} else {
-		logs_info = file_names
+	} else { //if logs_info is empty, just add records for every found file from directory
+		logs_info = log_file_names
 		for l := range logs_info {
-			logs_info[l] += " 0" //add every file in directory, in case logs_info is empty
+			logs_info[l] += " 0"
 		}
-		fmt.Printf("missing logs_info. Scan every log file from the beginning\n")
+		fmt.Printf("\nmissing logs_info. Scan every log file from the beginning")
 	}
 
-	//okay, now we have full, truly actual log files list in logs_dat. Let's analyze them:
 
+
+	var full_report string
+	var all_banned_urls_found = make(map[string]int)
+
+	//Okay, now we have full, actual log files list in logs_dat. Let's analyze them:
 	for z := range logs_info {
-		info := strings.Fields(logs_info[z]) //every line contains: log file name, offset(where ananlyze ended last time with that file)
+		info := strings.Fields(logs_info[z]) //every line contains: log file name, offset(where analyze ended last time with that file)
 		log_name = info[0]
 		offset, err = strconv.ParseInt(info[1], 10, 64)
 		check(err)
 
+		//Check if log file has grown
 		var new_log_file_size int64
-		fi, err := os.Stat(logFilesPath + "/" + log_name)
+		fi, err := os.Stat(logFilesPath + "\\" + log_name)
 		if err == nil {
-			// get the size
 			new_log_file_size = fi.Size()
 			check(err)
-
 			if new_log_file_size > offset {
 				logs_info[z] = fmt.Sprintf("%s %d", log_name, new_log_file_size)
 				check(err)
 			}
-
 			offset, err = strconv.ParseInt(info[1], 10, 64)
 			check(err)
 		}
 
+
+		//Decide how to scan log file, according to its current size
 		if offset == 0 {
 			fmt.Printf("\n%s file never been scanned. Scan from the bottom!", info[0])
 		} else if offset == new_log_file_size && !use_only_new_blacklist_items {
@@ -210,33 +209,69 @@ func scan_logs()  {
 			fmt.Printf("\n%s file size hasn't been changed! Scan skipped.", info[0])
 			continue
 		} else if offset < new_log_file_size {
-			fmt.Printf("case 3!\n")
 			fmt.Printf("\n%s file have been scanned before. Start scan where it's been ended.", info[0])
 		}
 
 		if use_only_new_blacklist_items {
 			offset = 0 	//if it's something added in blacklist, compare only them and scan all logs from 0
-			fmt.Printf("\n!warning! Blacklist changed! Scan from 0\n")
+			fmt.Printf(fmt.Sprintf("\n!warning! Blacklist changed! Scan %s logfile from 0", log_name))
 			} else {
-				fmt.Printf(fmt.Sprintf("\ndecided what to do with file %s. Scan from %d to %d.\n", log_name, offset, new_log_file_size))
+				fmt.Printf(fmt.Sprintf("\ndecided what to do with file %s. Scan from %d to %d.", log_name, offset, new_log_file_size))
 		}
 
-		report, found, err := analyze(logFilesPath + "/" + log_name, offset, banned_urls) //analyze current log file
+		//Analyze current log file
+		var report string
+		report, all_banned_urls_found, err = analyze(logFilesPath + "/"+ log_name, offset, banned_urls, all_banned_urls_found)
 
-		if os.IsNotExist(err) {
-			fmt.Printf(".. aaand it's not found. Error: " + err.Error())
-		} else if err == nil {
+		//if file exist and scan completed
+		if err == nil { //if something found
 			rar := fmt.Sprintf("\r\n%s %d", log_name, new_log_file_size)
 			dat += rar
-
-			if found > 0 {
-				alertMail(fmt.Sprintf("Alert-report for file %s! %d suspicious events!", log_name, found), report)
+			if len(report) > 0 {
+				full_report+=report
 			}
+		} else if os.IsNotExist(err) {	 //if file not found
+			fmt.Printf(".. aaand it's not found. Error: " + err.Error())
+		} else {
+			fmt.Printf("...Sorry. Something went wrong: " + err.Error())
 		}
 	}
 
+	//if something found: report it via e-mail
+	if len(full_report) > 0 {
+
+		var found_at_all int
+		for _, count := range all_banned_urls_found {
+			found_at_all+=count
+		}
+
+		lines := 0
+		var sheet string
+		sheet = fmt.Sprintf("\n\n\n\r\nFound %d suspicious events!: ", found_at_all)
+		for url, count := range all_banned_urls_found {
+			sheet += fmt.Sprintf("%d times: %s; ", count, url)
+			lines++
+			if lines == 10 {
+				sheet += "\n"
+			}
+		}
+		sheet+="\n\n------------------------------------------------------------------------------------------------------"
+		sheet+="\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+		sheet+="\n------------------------------------------------------------------------------------------------------\n\n\n\n\n\n"
+
+		a := time.Now().String() // why time appears with some trash in the tail?
+		clearTime := a[:len(a)-29]
+		sheet += fmt.Sprintf("\nTIME: %s", clearTime) + full_report
+
+		filename := filepath.Dir(os.Args[0]) + "\\loganalyzer-report.txt"
+		err = ioutil.WriteFile( filename, []byte(sheet), 0466)
+		check(err)
+
+		alertMail(fmt.Sprintf("Alert-report! %d suspicious events found!", found_at_all), sheet)
+	}
+
 	//write logs_info
-	err = ioutil.WriteFile("./logs_info.dat", []byte(dat), 0466)
+	err = ioutil.WriteFile(filepath.Dir(os.Args[0]) + "\\logs_info.dat", []byte(dat), 0466)
 	check(err)
 	}
 
