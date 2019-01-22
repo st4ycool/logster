@@ -39,17 +39,13 @@ func (m *myservice) Execute(args []string, r <-chan svc.ChangeRequest, changes c
 		log.Fatalf("Unable to find configuration file\nPlease, generate config using <generate> command\n ")
 		return
 	}
+
 	data, err := ioutil.ReadFile(jsonfile)
-	if err != nil {
-		elog.Info(500, fmt.Sprintf("Fatal! %s", err.Error()))
-		log.Fatalln(err)
-	}
+    check(err)
+
 	c := &Config{}
 	err = json.Unmarshal(data, c)
-	if err != nil {
-		log.Println(err)
-		return
-	}
+	check(err)
 
 	interval, err := strconv.ParseInt(c.ScanningInterval, 0, 0) //string to int
 	if err != nil {
@@ -112,5 +108,12 @@ func runService(name string, isDebug bool) {
 
 	println("\n")
 	elog.Info(1, fmt.Sprintf("%s service stopped", name))
+}
 
+func check(err error) {
+	if err != nil {
+		println("\n\n" + err.Error())
+		elog.Info(500, fmt.Sprintf("Error occured: %v", err))
+		os.Exit(0)
+	}
 }

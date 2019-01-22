@@ -33,7 +33,19 @@ func usage(errmsg string) {
 	os.Exit(2)
 }
 
+//var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to file")
+
 func main() {
+	//
+	//flag.Parse()							//PROFILING
+	//if *cpuprofile != "" {
+	//	f, err := os.Create(*cpuprofile)
+	//	if err != nil {
+	//		log.Fatal(err)
+	//	}
+	//	pprof.StartCPUProfile(f)
+	//	defer pprof.StopCPUProfile()
+	//}										//__________
 
 	const svcName = "Mdaemon Log Analyzer"
 		writer := io.Writer(os.Stdout)
@@ -79,7 +91,6 @@ func main() {
 		usage(fmt.Sprintf("invalid command %s", cmd))
 	}
 	if err != nil {
-		elog.Info(500, fmt.Sprintf("Fatal! Failed to %s %s: %s", cmd, svcName, err.Error()))
 		log.Fatalf("failed to %s %s: %v", cmd, svcName, err)
 	}
 	return

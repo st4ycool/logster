@@ -17,7 +17,13 @@ import (
 	"log"
 	"encoding/json"
 	"time"
+	"regexp"
 )
+
+func timeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	log.Printf("\nfunction %s took %s\n", name, elapsed)
+}
 
 func scan_logs() {
 
@@ -30,7 +36,7 @@ func scan_logs() {
 	jsonfile := filepath.Dir(os.Args[0]) + "\\conf.json"
 	if _, err := os.Stat(jsonfile); err != nil {
 		elog.Info(500, err.Error())
-		log.Fatalf("\nUnable to find configuration file [%s].", jsonfile)
+		log.Fatalf("\nUnable to find configuration file [%s]", jsonfile)
 		return
 	}
 
@@ -58,7 +64,7 @@ func scan_logs() {
 	dat_f := filepath.Dir(os.Args[0]) + "\\logs_info.dat"
 
 	if _, err := os.Stat(dat_f); err != nil {
-		fmt.Printf("\nUnable to find logs info file")
+		fmt.Printf("\nUnable to find logs_info file [%s]. ", dat_f)
 		os.Create(dat_f)
 	}
 
@@ -113,21 +119,23 @@ func scan_logs() {
 
 	banned_urls := make([]string, 0) //store all blacklist items (urls or ips, or domain names)
 	for scanner_blacklist.Scan() {
-		if scanner_blacklist.Text() != "" {
+		a:=scanner_blacklist.Text()
+		if  a != "" {
 			banned_urls = append(banned_urls, scanner_blacklist.Text())
 		}
 	}
 
-
 	//Find all .log files in path set in conf.json
 	log_file_names := make([]string, 0)
 
-	//todo: check if filepath is valid, before calling filepath.Walk. Different check for linux and win branch pls )
-	err = filepath.Walk(logFilesPath+"/", func(path string, info os.FileInfo, err error) error {	//recursive walk through directory
+	err = filepath.Walk(logFilesPath + "\\", func(path string, info os.FileInfo, err error) error {	//recursive walk through directory
 		if info.IsDir() && (info.Name() != filepath.Base(logFilesPath)) { //skip all directories excluding root directory
 			return filepath.SkipDir
 		}
-		if filepath.Ext(path) == ".log" {
+		mdaemonLogFileRegexp, err := regexp.Compile(`MDaemon-20\d\d-\d\d-\d\d-SMTP-\(in\).log`) //regex for url
+		check(err)
+		//if filepath.Ext(path) == ".log" {
+		if mdaemonLogFileRegexp.MatchString(info.Name()) {
 			log_file_names = append(log_file_names, filepath.Base(path)) //collect all .log file names from current directory
 		}
 		return nil
@@ -154,7 +162,7 @@ func scan_logs() {
 	//not included in logs info - add it, with 0 offset.
 
 	if len(logs_info) > 0 {
-		for f := range log_file_names {	//ain't range for slices return 2 index and value? Can't understand how this works
+		for f := range log_file_names {	//todo: isn't range for slices return 2 index and value? Can't understand how this works
 			var recordFound bool
 			for x := range logs_info {
 				recordFound = strings.Contains(logs_info[x], log_file_names[f]) // check if there is record in logs_info.dat of a file from directory
@@ -214,14 +222,14 @@ func scan_logs() {
 
 		if use_only_new_blacklist_items {
 			offset = 0 	//if it's something added in blacklist, compare only them and scan all logs from 0
-			fmt.Printf(fmt.Sprintf("\n!warning! Blacklist changed! Scan %s logfile from 0", log_name))
+			fmt.Printf(fmt.Sprintf("\nScan %s logfile from 0", log_name))
 			} else {
 				fmt.Printf(fmt.Sprintf("\ndecided what to do with file %s. Scan from %d to %d.", log_name, offset, new_log_file_size))
 		}
 
 		//Analyze current log file
 		var report string
-		report, all_banned_urls_found, err = analyze(logFilesPath + "/"+ log_name, offset, banned_urls, all_banned_urls_found)
+		report, all_banned_urls_found, err = analyze(logFilesPath + "\\" + log_name, offset, banned_urls, all_banned_urls_found)
 
 		//if file exist and scan completed
 		if err == nil { //if something found
@@ -247,7 +255,7 @@ func scan_logs() {
 
 		lines := 0
 		var sheet string
-		sheet = fmt.Sprintf("\n\n\n\r\nFound %d suspicious events!: ", found_at_all)
+		sheet = fmt.Sprintf("\n\n\n\r\nFound %d events!: ", found_at_all)
 		for url, count := range all_banned_urls_found {
 			sheet += fmt.Sprintf("%d times: %s; ", count, url)
 			lines++
@@ -267,7 +275,7 @@ func scan_logs() {
 		err = ioutil.WriteFile( filename, []byte(sheet), 0466)
 		check(err)
 
-		alertMail(fmt.Sprintf("Alert-report! %d suspicious events found!", found_at_all), sheet)
+		alertMail(fmt.Sprintf("MDaemon log Alert-report! %d suspicious events found!", found_at_all), sheet)
 	}
 
 	//write logs_info
@@ -275,8 +283,4 @@ func scan_logs() {
 	check(err)
 	}
 
-func check(err error) {
-	if err != nil {
-		println("\n\n" + err.Error())
-	}
-}
+

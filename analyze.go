@@ -5,11 +5,14 @@ import (
 	"regexp"
 	"bufio"
 	"fmt"
-	"strings"
 	"time"
+	"path/filepath"
+	"strings"
 )
 
 func analyze(log_name string, offset int64, banned_urls []string, all_banned_urls_found map[string]int) (string, map[string]int, error) {
+
+	defer timeTrack(time.Now(), "~analyze() of file " + filepath.Base(log_name) + "~")
 
 	log_file, err := os.Open(log_name)
 	if err != nil {
@@ -19,12 +22,14 @@ func analyze(log_name string, offset int64, banned_urls []string, all_banned_url
 
 	log_file.Seek(offset, 0) //skip lines analyzed in the past
 
+
+	email, err := regexp.Compile("[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*")
+	check(err)
 	url, err := regexp.Compile(`(([a-z0-9]+)(\.|\_|\-)?)+\.([a-z]+)`) //regex for url
 	check(err)
 	ip_addr, err := regexp.Compile(`(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})`) //regex for ip addresses
 	check(err)
-
-	section_mark, err := regexp.Compile(`----------`) //regex for section mark in mdaemon log files.
+	section_mark, err := regexp.Compile(`----------`) //regex for mark for new smtp session in mdaemon log files.
 	check(err)
 
 	scanner := bufio.NewScanner(log_file)
@@ -62,60 +67,58 @@ func analyze(log_name string, offset int64, banned_urls []string, all_banned_url
 			log_entry += "\n" + scanner.Text() //log entry means 1 section of log/1 event
 			if !scanner.Scan() {break} //break cycle if there are nothing more to scan
 
-		progress++
-		if progress%1000 == 0 {
-			off, _ := log_file.Seek(0, 1)
-			fmt.Printf("\r......Scanned: %d lines of log. Size: %d / %d MB......", progress, off/1000000, new_log_file_size/1000000)
-
-		}
+			progress++
+			if progress%1000 == 0 {
+				off, _ := log_file.Seek(0, 1)
+				fmt.Printf("\r......Scanned: %d lines of log. Size: %d / %d MB......", progress, off/1000000, new_log_file_size/1000000)
+			}
 		} //todo:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		if sectionMarkFound == true {
 			//okay, we copied 1 full log entry. Let's find urls and ips in it and compare to blacklist
-		sectionMarkFound = false
-		urlsAndIps := make([]string, 0)
-		for _, strings_found := range ip_addr.FindAllString(log_entry, -1) { //search for ip's in log entry
-			urlsAndIps = append(urlsAndIps, strings_found)
-		}
+			sectionMarkFound = false
+			urlsAndIps := make([]string, 0)
+			for _, strings_found := range ip_addr.FindAllString(log_entry, -1) { //search for ips in log entry
+				urlsAndIps = append(urlsAndIps, strings_found)
+			}
 
-		for _, strings_found := range url.FindAllString(log_entry, -1) { //search for url's in log entry
-			urlsAndIps = append(urlsAndIps, strings_found)
-		}
+			for _, strings_found := range email.FindAllString(log_entry, -1) { //search for e-mails in log entry
+				urlsAndIps = append(urlsAndIps, strings_found)
+			}
+
+			for _, strings_found := range url.FindAllString(log_entry, -1) { //search for urls in log entry
+				urlsAndIps = append(urlsAndIps, strings_found)
+			}
 
 			for _, found_match := range urlsAndIps { //compare found urls and ips from log file_bs with every url and ip from blacklist.
 
-			for _, banned := range banned_urls {
-				if banned != "" {
-					if strings.Contains(found_match, banned) {
-						found++ //counter for found intersection
-						if _, ok := banned_report[banned]; ok { //check if i already found that banned url, count them for summary in report.
-							banned_report[banned]++
-						} else {
-							banned_report[banned] = 1
-						}
+				for _, banned := range banned_urls {
 
-						//
-						//// change all http:// and dots to similar looking ascii symbols
-						//log_entry = strings.Replace(log_entry, ".", "ˌ", -1)             // to exclude missclicks on dangerous links, etc, when receiving
-						//log_entry = strings.Replace(log_entry, "http://", "hțțp://", -1) // log analyze report via e-mail. URL won't be clickable
-
-
-						report += "\n\n\n..........\nFound banned \"" + banned + "\" in section: \n" + log_entry
-
-						var flag = false
-						for _, ip := range ips {
-							if ip == banned {
-								flag = true
+					if banned != "" {
+						if strings.Contains(found_match, banned) {
+							found++ //counter for found intersection
+							if _, ok := banned_report[banned]; ok { //check if i already found that banned url, count them for summary in report.
+								banned_report[banned]++
+							} else {
+								banned_report[banned] = 1
 							}
-							if flag {
-								ip += banned
+
+							report += "\n\n\n..........\nFound banned \"" + banned + "\" in section: \n" + log_entry
+
+							var flag = false
+							for _, ip := range ips {
+								if ip == banned {
+									flag = true
+								}
+								if flag {
+									ip += banned
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-	}
 	} //todo:!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	if ips != nil {
@@ -138,7 +141,7 @@ func analyze(log_name string, offset int64, banned_urls []string, all_banned_url
 
 	for url, count := range banned_report {
 		if _, ok := all_banned_urls_found[url]; ok { //check if i already found that banned url, count them for summary in report.
-			all_banned_urls_found[url]+= count
+			all_banned_urls_found[url] += count
 		} else {
 			all_banned_urls_found[url] = count
 		}
